@@ -4088,6 +4088,8 @@ public class Theme {
                 if (t != null) {
                     currentNightTheme = t;
                 }
+            } else if (themesDict.containsKey("Night")) {
+                currentNightTheme = themesDict.get("Night");
             }
 
             if (currentNightTheme != null && !themeConfig.contains("lastDarkTheme")) {
