@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Fresh Super-App v2.0 | تلگرام اصلی + اینستاگرام بومی + ضدسانسور</title>
+    <meta name="description" content="دانلود مستقیم سوپراپلیکیشن Fresh v2.0 اندروید؛ ترکیب کلاینت رسمی تلگرام با پروتکل مهندسی‌معکوس‌شده اینستاگرام و شبکه ضدسانسور بدون وب‌ویو یا افت کیفیت.">
+    <meta name="theme-color" content="#0A0E17">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#00D2FF',
+                            blue: '#0072FF',
+                            emerald: '#00F5A0',
+                            purple: '#8A2387',
+                            pink: '#E94057',
+                            orange: '#F27121'
+                        },
+                        dark: {
+                            950: '#07090E',
+                            900: '#0C101A',
+                            850: '#111726',
+                            800: '#171F32',
+                            700: '#232E4A'
+                        }
+                    },
+                    fontFamily: {
+                        vazir: ['Vazirmatn', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+            background-color: #07090E;
+            color: #E2E8F0;
+        }
+        .glass-card {
+            background: rgba(17, 23, 38, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 210, 255, 0.35);
+        }
+        .glow-btn {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.35);
+        }
+        .glow-btn:hover {
+            box-shadow: 0 0 35px rgba(0, 245, 160, 0.55);
+        }
+        .gradient-text-tg {
+            background: linear-gradient(135deg, #00D2FF 0%, #0072FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-text-ig {
+            background: linear-gradient(135deg, #F27121 0%, #E94057 50%, #8A2387 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-cyan-500 selection:text-black">
+
+    <!-- Top Navbar -->
+    <header class="sticky top-0 z-50 glass-card border-b border-white/5 bg-dark-950/80">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center font-black text-black text-xl shadow-lg">
+                    F
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-tight text-white">Fresh</span>
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-semibold mr-2 border border-cyan-500/30">v2.0 SuperApp</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+                <a href="#features" class="hover:text-cyan-400 transition">ویژگی‌ها</a>
+                <a href="#architecture" class="hover:text-cyan-400 transition">معماری بومی</a>
+                <a href="#security" class="hover:text-cyan-400 transition">شبکه ضدسانسور</a>
+                <a href="#download" class="hover:text-cyan-400 transition">دانلود APK</a>
+            </nav>
+
+            <a href="https://github.com/sinamp00/Fresh" target="_blank" class="flex items-center gap-2 text-xs bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 transition">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                <span>مخزن گیت‌هاب</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-16 pb-20 overflow-hidden">
+        <!-- Glow accents -->
+        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 left-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold mb-6">
+                <span>نسل جدید سوپراپلیکیشن‌های موبایل</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                قدرت <span class="gradient-text-tg">تلگرام رسمی</span> در کنار<br>
+                آزادی <span class="gradient-text-ig">اینستاگرام بومی</span>
+            </h1>
+
+            <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                سوپراپلیکیشن <strong class="text-white font-medium">Fresh</strong> ترکیبی یکپارچه از کلاینت رسمی و دست‌نخورده تلگرام و موتور معکوس اینستاگرام بر پایه معماری نیتیو اندروید، همراه با لایه‌ی پیشرفته دور زدن فیلترینگ و بازرسی عمیق پکت (DPI).
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#download" class="glow-btn bg-gradient-to-r from-cyan-500 to-emerald-400 text-slate-950 font-bold px-8 py-3.5 rounded-xl hover:scale-105 active:scale-95 transition flex items-center gap-2">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                    <span>دانلود مستقیم APK (نسخه ۲.۰)</span>
+                </a>
+                <a href="https://github.com/sinamp00/Fresh/releases/tag/v2.0.0" target="_blank" class="glass-card hover:bg-white/10 text-white font-semibold px-6 py-3.5 rounded-xl transition flex items-center gap-2">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span>مشاهده Release در گیت‌هاب</span>
+                </a>
+            </div>
+
+            <!-- Badges -->
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
+                <div class="flex items-center gap-1.5">
+                    <span class="text-emerald-400">✓</span> تلگرام رسمی بدون تغییر تم و رنگ
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-emerald-400">✓</span> بدون هیچ وب‌ویو کند یا مسدود
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-emerald-400">✓</span> بای‌پس هوشمند اختلالات اینترنت
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-emerald-400">✓</span> کاملاً رایگان و متن‌باز
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Pillars / Features -->
+    <section id="features" class="py-16 max-w-6xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-3">ستون‌های اصلی Fresh v2.0</h2>
+            <p class="text-slate-400 text-sm max-w-xl mx-auto">طراحی شده از ریشه برای سرعت بی‌نقص، مصرف بهینه باتری و اتصال پایدار</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Pillar 1 -->
+            <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-5 group-hover:scale-110 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">هسته اصیل و تمیز تلگرام</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    مبتنی بر تلگرام رسمی نسخه 12.10.3. تمامی تم‌های رسمی (Classic Blue، Day، Dark Blue، Night) کاملاً سالم و دست‌نخورده هستند. هنگام فعال‌سازی دارک‌مود، صفحه سیاه مطلق نمی‌شود و لانچ تب نخست آنی است.
+                </p>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                <div class="w-12 h-12 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center mb-5 group-hover:scale-110 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">موتور پروتکل معکوس اینستاگرام</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    بدون اتکا به مرورگر داخلی یا وب‌ویو فیلترشده؛ فید و ریلزها مستقیماً با پروتکل بومی از سرورهای اینستاگرام واکشی شده و با RecyclerView و پلیر اختصاصی Media3 با شتاب‌دهنده سخت‌افزاری پخش می‌شوند.
+                </p>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-5 group-hover:scale-110 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">شبکه ضدسانسور و DPI Bypass</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    مجهز به فناوری تقطیع پکت TLS (ClientHello Fragmentation)، آی‌پی‌های تمیز Anycast برای جلوگیری از مسمومیت DNS ایران، و قابلیت هدایت خودکار مدیاها از پروکسی فعال تلگرام (MTProto / SOCKS5).
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture & Navigation Tabs -->
+    <section id="architecture" class="py-16 max-w-6xl mx-auto px-4 border-t border-white/5">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-3">۴ تب بومی در ناوبری شیشه‌ای</h2>
+            <p class="text-slate-400 text-sm max-w-xl mx-auto">دسترسی بدون درنگ به تمامی قابلیت‌ها بدون جابجایی بین اپلیکیشن‌های مختلف</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="glass-card p-5 rounded-xl border border-cyan-500/20">
+                <div class="text-xs text-cyan-400 font-bold mb-1">تب ۰۱</div>
+                <h4 class="text-lg font-bold text-white mb-2">💬 گفتگوهای تلگرام</h4>
+                <p class="text-xs text-slate-300 leading-relaxed">ورود آنی بدون لودینگ؛ فهرست پیام‌ها، کانال‌ها و گروه‌های تلگرام با انیمیشن‌های روان.</p>
+            </div>
+
+            <div class="glass-card p-5 rounded-xl border border-pink-500/20">
+                <div class="text-xs text-pink-400 font-bold mb-1">تب ۰۲</div>
+                <h4 class="text-lg font-bold text-white mb-2">📸 فید اینستاگرام</h4>
+                <p class="text-xs text-slate-300 leading-relaxed">پست‌های جدید دوستان، لایک سریع با دوبار لمس، و فوروارد یک‌کلیکه به چت‌های تلگرام.</p>
+            </div>
+
+            <div class="glass-card p-5 rounded-xl border border-purple-500/20">
+                <div class="text-xs text-purple-400 font-bold mb-1">تب ۰۳</div>
+                <h4 class="text-lg font-bold text-white mb-2">🎬 ریلز (Reels)</h4>
+                <p class="text-xs text-slate-300 leading-relaxed">سوایپ عمودی تمام‌صفحه به سبک تیک‌تاک و ریلز، با کشینگ هوشمند و پخش بدون لگ.</p>
+            </div>
+
+            <div class="glass-card p-5 rounded-xl border border-emerald-500/20">
+                <div class="text-xs text-emerald-400 font-bold mb-1">تب ۰۴</div>
+                <h4 class="text-lg font-bold text-white mb-2">⚙️ تنظیمات و لاگین</h4>
+                <p class="text-xs text-slate-300 leading-relaxed">لاگین رمزنگاری‌شده RSA اینستاگرام، ورود دو مرحله‌ای و تنظیمات پیشرفته شبکه و پروکسی.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-20 max-w-4xl mx-auto px-4 text-center">
+        <div class="glass-card p-8 sm:p-12 rounded-3xl border border-cyan-500/30 relative">
+            <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">دانلود آخرین نسخه Fresh</h2>
+            <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8">
+                فایل نصبی بدون نیاز به نصب هیچ‌گونه پیش‌نیاز روی تمامی گوشی‌های اندروید (نسخه ۸.۰ به بالا) به طور مستقل نصب می‌شود.
+            </p>
+
+            <div class="inline-block w-full max-w-md bg-dark-950/70 p-5 rounded-2xl border border-white/5 mb-8 text-right text-xs space-y-2">
+                <div class="flex justify-between border-b border-white/5 pb-2">
+                    <span class="text-slate-400">نام بسته (Package):</span>
+                    <span class="text-cyan-400 font-mono">org.fresh.app</span>
+                </div>
+                <div class="flex justify-between border-b border-white/5 pb-2">
+                    <span class="text-slate-400">نسخه:</span>
+                    <span class="text-white font-mono">v2.0.0 (Build 70899)</span>
+                </div>
+                <div class="flex justify-between border-b border-white/5 pb-2">
+                    <span class="text-slate-400">حجم فایل:</span>
+                    <span class="text-white font-mono">81.05 MB (یونیورسال)</span>
+                </div>
+                <div class="flex justify-between border-b border-white/5 pb-2">
+                    <span class="text-slate-400">معماری‌ها:</span>
+                    <span class="text-emerald-400 font-mono">arm64-v8a + armeabi-v7a</span>
+                </div>
+                <div class="pt-1">
+                    <span class="text-slate-400 block mb-1">کد هش سلامت (SHA-256):</span>
+                    <span class="text-slate-400 font-mono text-[10px] break-all select-all bg-black/40 p-1.5 rounded block">
+                        CCAAF5555E7D00C550CDBD4BA9383779F95EC9F98B6B2877EE732B97831130FF
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh-SuperApp.apk" class="glow-btn w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-emerald-400 text-slate-950 font-bold px-8 py-4 rounded-xl hover:scale-105 active:scale-95 transition flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                    <span>دانلود مستقیم Fresh-SuperApp.apk</span>
+                </a>
+                <a href="https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh.apk" class="w-full sm:w-auto glass-card hover:bg-white/10 text-white font-semibold px-6 py-4 rounded-xl transition flex items-center justify-center gap-2">
+                    <span>لینک دانلود کمکی (Fresh.apk)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/5 text-center text-xs text-slate-500">
+        <p>سوپراپلیکیشن Fresh — توسعه‌یافته با کلاینت رسمی تلگرام و پروتکل بومی اینستاگرام</p>
+        <p class="mt-2 text-slate-600">متن‌باز تحت پروانه عمومی GPLv2 • مخزن رسمی در <a href="https://github.com/sinamp00/Fresh" class="text-cyan-400 hover:underline">GitHub</a></p>
+    </footer>
+
+</body>
+</html>

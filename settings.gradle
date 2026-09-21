@@ -7,6 +7,8 @@ include ':TMessagesProj_AppTests'
 include ':jlatexmath'
 project(':jlatexmath').projectDir = file('TMessagesProj/lib/jlatexmath/jlatexmath')
 
+include ':instagram-api'
+
 dependencyResolutionManagement {
     repositories {
         google()

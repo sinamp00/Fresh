@@ -398,10 +398,14 @@ public class GlassTabView extends FrameLayout implements MainTabsLayout.Tab, Fac
     }
 
     public static GlassTabView createMainTab(Context context, Theme.ResourcesProvider resourcesProvider, TabAnimation tabAnimation, @StringRes int stringRes) {
+        return createMainTab(context, resourcesProvider, tabAnimation, LocaleController.getString(stringRes));
+    }
+
+    public static GlassTabView createMainTab(Context context, Theme.ResourcesProvider resourcesProvider, TabAnimation tabAnimation, CharSequence text) {
         GlassTabView tab = new GlassTabView(context);
         tab.resourcesProvider = resourcesProvider;
         tab.tabAnimation = tabAnimation;
-        tab.textView.setText(LocaleController.getString(stringRes));
+        tab.textView.setText(text);
         tab.checkPlayAnimation(false);
         tab.imageView.setLayoutParams(LayoutHelper.createFrame(24, 24, Gravity.CENTER_HORIZONTAL | Gravity.TOP, 0, 4, 0, 0));
         tab.colorDefault = Theme.getColor(Theme.key_glass_tabUnselected, resourcesProvider);
@@ -566,7 +570,8 @@ public class GlassTabView extends FrameLayout implements MainTabsLayout.Tab, Fac
         ARTICLE(R.raw.tab_article, R.raw.tab_article_reverse),
 
         BOOSTS(R.raw.boosts, 25, 49),
-        MONETIZATION(R.raw.monetize, 19, 45);
+        MONETIZATION(R.raw.monetize, 19, 45),
+        REELS(TabAnimationType.STATIC, R.drawable.menu_video_loop);
 
         public final @RawRes int iconToFilled;
         public final @RawRes int iconToOutline;

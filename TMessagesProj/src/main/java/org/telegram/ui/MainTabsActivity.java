@@ -90,19 +90,18 @@ import me.vkryl.android.animator.FactorAnimator;
 public class MainTabsActivity extends ViewPagerActivity implements NotificationCenter.NotificationCenterDelegate, FactorAnimator.Target {
 
     public static final int TABS_COUNT = 4;
-    private static final int POSITION_CHATS = 0;
-    private static final int POSITION_CONTACTS = 1;
-    private static final int POSITION_CALLS_OR_SETTINGS = 2;
-    private static final int POSITION_PROFILE = 3;
+    public static final int POSITION_CHATS = 0;
+    public static final int POSITION_FEED = 1;
+    public static final int POSITION_REELS = 2;
+    public static final int POSITION_SETTINGS = 3;
 
-    private static final int INDEX_CHATS = 0;
-    private static final int INDEX_CONTACTS = 1;
-    private static final int INDEX_SETTINGS = 2;
-    private static final int INDEX_CALLS = 3;
-    private static final int INDEX_PROFILE = 4;
+    public static final int INDEX_CHATS = 0;
+    public static final int INDEX_FEED = 1;
+    public static final int INDEX_REELS = 2;
+    public static final int INDEX_SETTINGS = 3;
 
     private static int indexToPosition(int index) {
-        return index > 2 ? index - 1 : index;
+        return index;
     }
 
     private static final int ANIMATOR_ID_TABS_VISIBLE = 0;
@@ -279,17 +278,6 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
     }
 
     private void checkContactsTabBadge() {
-        if (tabsView != null && tabs[INDEX_CONTACTS] != null) {
-            final boolean hasPermission = Build.VERSION.SDK_INT >= 23 && ContactsController.hasContactsPermission();
-            if (hasPermission) {
-                MessagesController.getGlobalNotificationsSettings().edit().putBoolean("askAboutContacts2", true).apply();
-            }
-            if (Build.VERSION.SDK_INT >= 23 && UserConfig.getInstance(currentAccount).syncContacts && !hasPermission && MessagesController.getGlobalNotificationsSettings().getBoolean("askAboutContacts2", true)) {
-                tabs[INDEX_CONTACTS].setCounter("!", true, true);
-            } else {
-                tabs[INDEX_CONTACTS].setCounter(null, true, true);
-            }
-        }
     }
 
     @Override
@@ -310,21 +298,17 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
         tabsView.setPadding(dp(DialogsActivity.MAIN_TABS_MARGIN + 4), dp(DialogsActivity.MAIN_TABS_MARGIN + 4), dp(DialogsActivity.MAIN_TABS_MARGIN + 4), dp(DialogsActivity.MAIN_TABS_MARGIN + 4));
         tabsView.setMaxWidth(dp(328 + DialogsActivity.MAIN_TABS_MARGIN * 2));
 
-        tabs = new GlassTabView[5];
+        tabs = new GlassTabView[4];
         tabs[INDEX_CHATS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.CHATS, R.string.MainTabsChats);
-        tabs[INDEX_CONTACTS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.CONTACTS, R.string.MainTabsContacts);
-        tabs[INDEX_SETTINGS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.SETTINGS, R.string.Settings);
-        tabs[INDEX_CALLS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.CALLS, R.string.MainTabsCalls);
-        tabs[INDEX_PROFILE] = GlassTabView.createAvatar(context, resourceProvider, currentAccount, R.string.MainTabsProfile);
+        tabs[INDEX_FEED] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.GALLERY, "فید");
+        tabs[INDEX_REELS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.REELS, "ریلز");
+        tabs[INDEX_SETTINGS] = GlassTabView.createMainTab(context, resourceProvider, GlassTabView.TabAnimation.SETTINGS, "تنظیمات");
         tabs[INDEX_CHATS].setOnLongClickListener(this::openFoldersSelector);
-        tabs[INDEX_CONTACTS].setOnLongClickListener(this::openContactsSelector);
-        tabs[INDEX_CALLS].setOnLongClickListener(this::openCallsSelector);
-        tabs[INDEX_PROFILE].setOnLongClickListener(this::openAccountSelector);
 
         tabsView.addTabToIgnoreClick(tabs[INDEX_CHATS]);
-        tabsView.addTabToIgnoreClick(tabs[INDEX_CONTACTS]);
-        tabsView.addTabToIgnoreClick(tabs[INDEX_PROFILE]);
-        tabsView.addTabToIgnoreClick(tabs[INDEX_CALLS]);
+        tabsView.addTabToIgnoreClick(tabs[INDEX_FEED]);
+        tabsView.addTabToIgnoreClick(tabs[INDEX_REELS]);
+        tabsView.addTabToIgnoreClick(tabs[INDEX_SETTINGS]);
 
         for (int index = 0; index < tabs.length; index++) {
             final GlassTabView view = tabs[index];
@@ -350,7 +334,6 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
             tabsView.addView(tabs[index]);
             tabsView.setViewVisible(view, true, false);
         }
-        checkUi_callTabVisible(getUserConfig().showCallsTab, false);
 
         selectTab(viewPager.getCurrentPosition(), false);
 
@@ -732,13 +715,6 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
 
         if (viewPager != null) {
             final int currentPosition = viewPager.getCurrentPosition();
-            if (currentPosition != POSITION_CALLS_OR_SETTINGS && dropCallsFragmentAfterPageScroll) {
-                dropFragmentAtPosition(POSITION_CALLS_OR_SETTINGS);
-                dropCallsFragmentAfterPageScroll = false;
-            }
-            if (currentPosition != POSITION_PROFILE) {
-                dropFragmentAtPosition(POSITION_PROFILE);
-            }
             if (pendingFolderId != null && currentPosition == POSITION_CHATS && dialogsActivity != null) {
                 dialogsActivity.scrollToFolder(pendingFolderId);
                 pendingFolderId = null;
@@ -806,35 +782,24 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
 
     @Override
     protected BaseFragment createBaseFragmentAt(int position) {
-        if (position == POSITION_CONTACTS) {
-            Bundle args = new Bundle();
-            args.putBoolean("needPhonebook", true);
-            args.putBoolean("needFinishFragment", false);
-            args.putBoolean("hasMainTabs", true);
-            return new ContactsActivity(args);
-        } else if (position == POSITION_CALLS_OR_SETTINGS) {
-            if (getUserConfig().showCallsTab) {
-                Bundle args = new Bundle();
-                args.putBoolean("needFinishFragment", false);
-                args.putBoolean("hasMainTabs", true);
-                return new CallLogActivity(args);
-            }
-            Bundle args = new Bundle();
-            args.putBoolean("hasMainTabs", true);
-            return new SettingsActivity(args);
-        } else if (position == POSITION_CHATS) {
+        if (position == POSITION_CHATS) {
             Bundle args = new Bundle();
             args.putBoolean("hasMainTabs", true);
             dialogsActivity = new DialogsActivity(args);
             dialogsActivity.setMainTabsActivityController(new MainTabsActivityControllerImpl());
             return dialogsActivity;
-        } else if (position == POSITION_PROFILE) {
+        } else if (position == POSITION_FEED) {
             Bundle args = new Bundle();
-            args.putLong("user_id", UserConfig.getInstance(currentAccount).getClientUserId());
-            args.putBoolean("my_profile", true);
-            // args.putBoolean("expandPhoto", true);
             args.putBoolean("hasMainTabs", true);
-            return new ProfileActivity(args);
+            return new org.telegram.ui.fresh.feed.InstagramFeedActivity(args);
+        } else if (position == POSITION_REELS) {
+            Bundle args = new Bundle();
+            args.putBoolean("hasMainTabs", true);
+            return new org.telegram.ui.fresh.reels.InstagramReelsActivity(args);
+        } else if (position == POSITION_SETTINGS) {
+            Bundle args = new Bundle();
+            args.putBoolean("hasMainTabs", true);
+            return new org.telegram.ui.fresh.settings.FreshInstagramSettingsActivity(args);
         }
         return null;
     }
@@ -991,21 +956,11 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
         } else if (id == NotificationCenter.needSetDayNightTheme) {
             clearAllHiddenFragments();
         } else if (id == NotificationCenter.callTabsVisibleToggled) {
-            final boolean callTabsVisible = getUserConfig().showCallsTab;
-            checkUi_callTabVisible(callTabsVisible, true);
-            if (viewPager != null && viewPager.getCurrentPosition() == POSITION_CALLS_OR_SETTINGS) {
-                viewPager.scrollToPosition(POSITION_CHATS);
-                selectTab(POSITION_CHATS, true);
-                dropCallsFragmentAfterPageScroll = true;
-            } else {
-                dropFragmentAtPosition(POSITION_CALLS_OR_SETTINGS);
-            }
+            // Maintained in 4-tab SuperApp layout
         } else if (id == NotificationCenter.mainUserInfoChanged) {
-            if (tabs != null && tabs[INDEX_PROFILE] != null) {
-                tabs[INDEX_PROFILE].updateUserAvatar(currentAccount);
-            }
+            // Maintained in 4-tab SuperApp layout
         } else if (id == NotificationCenter.contactsPermissionBadgeCheck) {
-            checkContactsTabBadge();
+            // Maintained in 4-tab SuperApp layout
         }
     }
 
@@ -1062,8 +1017,7 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
             return;
         }
 
-        final float animatedPosition = viewPager.getPositionAnimated();
-        final float isProfile = 1f - MathUtils.clamp(Math.abs(POSITION_PROFILE - animatedPosition), 0, 1);
+        final float isProfile = 0f;
         final float hide = 1f - AndroidUtilities.getNavigationBarThirdButtonsFactor(0, 1f, navigationBarHeight);
         float alpha = (1f - isProfile * hide) * animatorTabsVisible.getFloatValue();
         if (tabletLayout) {
@@ -1092,10 +1046,6 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
     }
 
     private void checkUi_callTabVisible(boolean callTabsVisible, boolean animated) {
-        if (tabsView != null) {
-            tabsView.setViewVisible(tabs[INDEX_SETTINGS], !callTabsVisible, animated);
-            tabsView.setViewVisible(tabs[INDEX_CALLS], callTabsVisible, animated);
-        }
     }
 
     @Override
@@ -1167,9 +1117,9 @@ public class MainTabsActivity extends ViewPagerActivity implements NotificationC
 
         if (accountSwitchHint == null && HintsController.Hint.AccountSwitchHint.show()) {
             AndroidUtilities.runOnUIThread(() -> {
-                if (getContext() == null || tabs == null) return;
+                if (getContext() == null || tabs == null || tabs.length <= INDEX_SETTINGS) return;
 
-                final View v = tabs[INDEX_PROFILE];
+                final View v = tabs[INDEX_SETTINGS];
                 final float translate = (contentView.getWidth() - ((tabsView.getX() + v.getX()) + v.getWidth()) + v.getWidth() / 2f) / AndroidUtilities.density;
 
                 accountSwitchHint = new HintView2(getContext(), HintView2.DIRECTION_BOTTOM);

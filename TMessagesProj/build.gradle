@@ -95,6 +95,7 @@ dependencies {
     api project(":TMessagesProj_Modules:media3:media-lib-decoder-ffmpeg")
     api project(":TMessagesProj_Modules:media3:media-lib-session")
     api project(':jlatexmath')
+    api project(':instagram-api')
 
 //    implementation 'com.google.mlkit:translate:17.0.3'
 
