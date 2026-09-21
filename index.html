@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Fresh Super-App v2.0 | تلگرام اصلی + اینستاگرام بومی + ضدسانسور</title>
-    <meta name="description" content="دانلود مستقیم سوپراپلیکیشن Fresh v2.0 اندروید؛ ترکیب کلاینت رسمی تلگرام با پروتکل مهندسی‌معکوس‌شده اینستاگرام و شبکه ضدسانسور بدون وب‌ویو یا افت کیفیت.">
-    <meta name="theme-color" content="#0A0E17">
+    <title>Fresh Super-App v2.0 | تلگرام رسمی + اینستاگرام بومی + ضدسانسور</title>
+    <meta name="description" content="دانلود رسمی سوپراپلیکیشن پیشرفته Fresh v2.0 برای اندروید؛ ترکیب کلاینت رسمی و دست‌نخورده تلگرام با موتور مهندسی‌معکوس‌شده اینستاگرام و شبکه ضدسانسور TLS بدون وب‌ویو.">
+    <meta name="theme-color" content="#040508">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,271 +14,1171 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            cyan: '#00D2FF',
-                            blue: '#0072FF',
-                            emerald: '#00F5A0',
-                            purple: '#8A2387',
-                            pink: '#E94057',
-                            orange: '#F27121'
+                        void: {
+                            950: '#030407',
+                            900: '#06080E',
+                            850: '#0A0D15',
+                            800: '#0F1420',
+                            700: '#171E2E',
+                            600: '#222B40'
                         },
-                        dark: {
-                            950: '#07090E',
-                            900: '#0C101A',
-                            850: '#111726',
-                            800: '#171F32',
-                            700: '#232E4A'
+                        cyber: {
+                            emerald: '#00F5A0',
+                            emeraldDark: '#00B878',
+                            cyan: '#00F5FF',
+                            blue: '#2F80ED',
+                            purple: '#9B51E0',
+                            pink: '#FF2A85',
+                            amber: '#FFB800'
                         }
                     },
                     fontFamily: {
-                        vazir: ['Vazirmatn', 'system-ui', 'sans-serif']
+                        vazir: ['Vazirmatn', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
                     }
                 }
             }
         }
     </script>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
-            background-color: #07090E;
-            color: #E2E8F0;
+        * {
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        body {
+            background-color: #030407;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Classes */
         .glass-card {
-            background: rgba(17, 23, 38, 0.75);
+            background: rgba(10, 13, 21, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 245, 160, 0.3);
+            transform: translateY(-2px);
+        }
+        .glass-pill {
+            background: rgba(15, 20, 32, 0.8);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .glass-card:hover {
-            border-color: rgba(0, 210, 255, 0.35);
+
+        /* Ambient Glows */
+        .glow-emerald {
+            box-shadow: 0 0 50px -10px rgba(0, 245, 160, 0.35), 0 0 25px -5px rgba(0, 245, 160, 0.2);
         }
-        .glow-btn {
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.35);
+        .glow-emerald:hover {
+            box-shadow: 0 0 65px -5px rgba(0, 245, 160, 0.5), 0 0 30px -2px rgba(0, 245, 255, 0.3);
         }
-        .glow-btn:hover {
-            box-shadow: 0 0 35px rgba(0, 245, 160, 0.55);
+        .glow-cyan {
+            box-shadow: 0 0 45px -10px rgba(0, 245, 255, 0.3);
         }
-        .gradient-text-tg {
-            background: linear-gradient(135deg, #00D2FF 0%, #0072FF 100%);
+
+        /* Gradient Texts */
+        .gradient-brand {
+            background: linear-gradient(135deg, #00F5A0 0%, #00F5FF 50%, #2F80ED 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .gradient-text-ig {
-            background: linear-gradient(135deg, #F27121 0%, #E94057 50%, #8A2387 100%);
+        .gradient-ig {
+            background: linear-gradient(135deg, #FFB800 0%, #FF2A85 50%, #9B51E0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Equalizer Animation for Reels */
+        @keyframes eq1 { 0%, 100% { height: 6px; } 50% { height: 24px; } }
+        @keyframes eq2 { 0%, 100% { height: 18px; } 50% { height: 8px; } }
+        @keyframes eq3 { 0%, 100% { height: 10px; } 50% { height: 28px; } }
+        @keyframes eq4 { 0%, 100% { height: 22px; } 50% { height: 12px; } }
+        .eq-bar-1 { animation: eq1 0.8s ease-in-out infinite; }
+        .eq-bar-2 { animation: eq2 0.7s ease-in-out infinite; }
+        .eq-bar-3 { animation: eq3 0.9s ease-in-out infinite; }
+        .eq-bar-4 { animation: eq4 0.6s ease-in-out infinite; }
+
+        /* Rotating Disc */
+        @keyframes spinSlow { 100% { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spinSlow 5s linear infinite; }
+
+        /* Heart Pop Animation */
+        @keyframes heartPop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.35); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .animate-heart-pop {
+            animation: heartPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Grid Pattern */
+        .bg-grid-pattern {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: #030407; }
+        ::-webkit-scrollbar-thumb { background: #171E2E; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00F5A0; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen selection:bg-cyan-500 selection:text-black">
+<body class="min-h-screen flex flex-col selection:bg-cyber-emerald selection:text-black bg-grid-pattern">
 
-    <!-- Top Navbar -->
-    <header class="sticky top-0 z-50 glass-card border-b border-white/5 bg-dark-950/80">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center font-black text-black text-xl shadow-lg">
-                    F
-                </div>
-                <div>
-                    <span class="text-xl font-bold tracking-tight text-white">Fresh</span>
-                    <span class="text-xs px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-semibold mr-2 border border-cyan-500/30">v2.0 SuperApp</span>
-                </div>
-            </div>
+    <!-- Interactive Background Canvas -->
+    <canvas id="cyber-canvas" class="fixed inset-0 pointer-events-none -z-20 w-full h-full opacity-60"></canvas>
 
-            <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
-                <a href="#features" class="hover:text-cyan-400 transition">ویژگی‌ها</a>
-                <a href="#architecture" class="hover:text-cyan-400 transition">معماری بومی</a>
-                <a href="#security" class="hover:text-cyan-400 transition">شبکه ضدسانسور</a>
-                <a href="#download" class="hover:text-cyan-400 transition">دانلود APK</a>
+    <!-- Ambient Glowing Blurs -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[350px] sm:w-[750px] h-[350px] sm:h-[450px] bg-cyber-emerald/10 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+    <div class="fixed top-1/3 -left-20 w-[300px] sm:w-[500px] h-[350px] bg-cyber-cyan/10 rounded-full blur-[170px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-20 -right-20 w-[300px] sm:w-[500px] h-[400px] bg-cyber-pink/8 rounded-full blur-[180px] pointer-events-none -z-10"></div>
+
+    <!-- Floating Glass Header / Navbar -->
+    <header class="sticky top-3 sm:top-5 z-50 max-w-5xl mx-auto px-4 w-full">
+        <div class="glass-pill rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-2xl border-white/10 bg-void-950/80">
+            <!-- Brand -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-cyber-emerald via-cyber-cyan to-cyber-blue p-[2px] shadow-lg group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full rounded-full bg-void-950 flex items-center justify-center font-black text-cyber-emerald text-sm">
+                        FR
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-white font-extrabold text-lg tracking-tight">Fresh</span>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyber-emerald/15 text-cyber-emerald border border-cyber-emerald/30">v2.0 SuperApp</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-7 text-xs font-medium text-slate-300">
+                <a href="#simulator" class="hover:text-cyber-emerald transition">شبیه‌ساز زنده</a>
+                <a href="#architecture" class="hover:text-cyber-emerald transition">معماری بومی</a>
+                <a href="#stealth" class="hover:text-cyber-emerald transition">آزمایشگاه DPI</a>
+                <a href="#compare" class="hover:text-cyber-emerald transition">مقایسه عملکرد</a>
+                <a href="#faq" class="hover:text-cyber-emerald transition">پرسش‌ها</a>
             </nav>
 
-            <a href="https://github.com/sinamp00/Fresh" target="_blank" class="flex items-center gap-2 text-xs bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 transition">
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                <span>مخزن گیت‌هاب</span>
-            </a>
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2.5">
+                <a href="https://github.com/sinamp00/Fresh" target="_blank" class="hidden sm:flex items-center gap-1.5 text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span>گیت‌هاب</span>
+                </a>
+
+                <a href="#download" class="flex items-center gap-1.5 text-xs font-bold text-void-950 bg-cyber-emerald px-4 py-1.5 rounded-full hover:bg-cyber-cyan transition shadow-lg shadow-cyber-emerald/20 hover:scale-105 active:scale-95">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                    <span>دانلود APK</span>
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-16 pb-20 overflow-hidden">
-        <!-- Glow accents -->
-        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-10 left-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold mb-6">
-                <span>نسل جدید سوپراپلیکیشن‌های موبایل</span>
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            </div>
-
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6">
-                قدرت <span class="gradient-text-tg">تلگرام رسمی</span> در کنار<br>
-                آزادی <span class="gradient-text-ig">اینستاگرام بومی</span>
-            </h1>
-
-            <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-                سوپراپلیکیشن <strong class="text-white font-medium">Fresh</strong> ترکیبی یکپارچه از کلاینت رسمی و دست‌نخورده تلگرام و موتور معکوس اینستاگرام بر پایه معماری نیتیو اندروید، همراه با لایه‌ی پیشرفته دور زدن فیلترینگ و بازرسی عمیق پکت (DPI).
-            </p>
-
-            <div class="flex flex-wrap items-center justify-center gap-4">
-                <a href="#download" class="glow-btn bg-gradient-to-r from-cyan-500 to-emerald-400 text-slate-950 font-bold px-8 py-3.5 rounded-xl hover:scale-105 active:scale-95 transition flex items-center gap-2">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
-                    <span>دانلود مستقیم APK (نسخه ۲.۰)</span>
-                </a>
-                <a href="https://github.com/sinamp00/Fresh/releases/tag/v2.0.0" target="_blank" class="glass-card hover:bg-white/10 text-white font-semibold px-6 py-3.5 rounded-xl transition flex items-center gap-2">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                    <span>مشاهده Release در گیت‌هاب</span>
-                </a>
-            </div>
-
-            <!-- Badges -->
-            <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
-                <div class="flex items-center gap-1.5">
-                    <span class="text-emerald-400">✓</span> تلگرام رسمی بدون تغییر تم و رنگ
+    <!-- Main Hero Section -->
+    <main class="flex-1">
+        <section class="relative pt-12 sm:pt-20 pb-16 px-4">
+            <div class="max-w-5xl mx-auto text-center">
+                <!-- Status Pill -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-void-850 border border-cyber-emerald/30 text-cyber-emerald text-xs font-semibold mb-6 shadow-inner">
+                    <span class="w-2 h-2 rounded-full bg-cyber-emerald animate-ping"></span>
+                    <span>نسخهٔ پایدار ۲.۰ منتشر شد — تلگرام رسمی + اینستاگرام بومی</span>
                 </div>
-                <div class="flex items-center gap-1.5">
-                    <span class="text-emerald-400">✓</span> بدون هیچ وب‌ویو کند یا مسدود
-                </div>
-                <div class="flex items-center gap-1.5">
-                    <span class="text-emerald-400">✓</span> بای‌پس هوشمند اختلالات اینترنت
-                </div>
-                <div class="flex items-center gap-1.5">
-                    <span class="text-emerald-400">✓</span> کاملاً رایگان و متن‌باز
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Key Pillars / Features -->
-    <section id="features" class="py-16 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-white mb-3">ستون‌های اصلی Fresh v2.0</h2>
-            <p class="text-slate-400 text-sm max-w-xl mx-auto">طراحی شده از ریشه برای سرعت بی‌نقص، مصرف بهینه باتری و اتصال پایدار</p>
-        </div>
+                <!-- Main Punchline -->
+                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.25] mb-6">
+                    نقطهٔ تلاقی <span class="gradient-brand">سرعت تلگرام</span><br class="hidden sm:inline">
+                    و آزادی <span class="gradient-ig">اینستاگرام بومی</span>
+                </h1>
 
-        <div class="grid md:grid-cols-3 gap-6">
-            <!-- Pillar 1 -->
-            <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
-                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-5 group-hover:scale-110 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-2">هسته اصیل و تمیز تلگرام</h3>
-                <p class="text-sm text-slate-300 leading-relaxed">
-                    مبتنی بر تلگرام رسمی نسخه 12.10.3. تمامی تم‌های رسمی (Classic Blue، Day، Dark Blue، Night) کاملاً سالم و دست‌نخورده هستند. هنگام فعال‌سازی دارک‌مود، صفحه سیاه مطلق نمی‌شود و لانچ تب نخست آنی است.
+                <p class="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                    نخستین سوپراپلیکیشن اندرویدی با تلفیق کلاینت رسمی و دست‌نخوردهٔ تلگرام (v12.10.3) و پروتکل معکوس اینستاگرام بر پایه کاتلین؛ مجهز به لایهٔ شکستن پکت‌های TLS برای عبور هوشمندانه از فیلترینگ و بازرسی عمیق پکت (DPI).
                 </p>
-            </div>
 
-            <!-- Pillar 2 -->
-            <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
-                <div class="w-12 h-12 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center mb-5 group-hover:scale-110 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <!-- Action CTAs -->
+                <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
+                    <a href="https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh-SuperApp.apk" class="glow-emerald bg-gradient-to-r from-cyber-emerald to-cyber-cyan text-void-950 font-black px-7 sm:px-9 py-3.5 rounded-xl hover:scale-105 active:scale-95 transition flex items-center gap-2.5 text-sm sm:text-base">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                        <span>دانلود مستقیم Fresh-SuperApp.apk</span>
+                        <span class="text-xs font-mono font-bold bg-black/20 px-2 py-0.5 rounded mr-1">۸۱ MB</span>
+                    </a>
+
+                    <button onclick="openQrModal()" class="glass-card text-white hover:text-cyber-emerald font-semibold px-5 py-3.5 rounded-xl transition flex items-center gap-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+                        <span>اسکن بارکد QR</span>
+                    </button>
+
+                    <button onclick="copyHash()" id="copy-btn" class="glass-card text-slate-300 hover:text-white font-mono text-xs px-4 py-3.5 rounded-xl transition flex items-center gap-1.5">
+                        <svg id="copy-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        <span id="copy-text">کپی SHA-256</span>
+                    </button>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-2">موتور پروتکل معکوس اینستاگرام</h3>
-                <p class="text-sm text-slate-300 leading-relaxed">
-                    بدون اتکا به مرورگر داخلی یا وب‌ویو فیلترشده؛ فید و ریلزها مستقیماً با پروتکل بومی از سرورهای اینستاگرام واکشی شده و با RecyclerView و پلیر اختصاصی Media3 با شتاب‌دهنده سخت‌افزاری پخش می‌شوند.
-                </p>
-            </div>
 
-            <!-- Pillar 3 -->
-            <div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-5 group-hover:scale-110 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <!-- Live Metrics Strip -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-16 text-center">
+                    <div class="glass-card p-3 rounded-xl">
+                        <div class="text-cyber-emerald font-black text-xl sm:text-2xl font-mono">۱۰۰٪</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">تم‌های کارخانه‌ای رسمی</div>
+                    </div>
+                    <div class="glass-card p-3 rounded-xl">
+                        <div class="text-cyber-cyan font-black text-xl sm:text-2xl font-mono">۰ ثانیه</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">لانچ آنی چت‌های تلگرام</div>
+                    </div>
+                    <div class="glass-card p-3 rounded-xl">
+                        <div class="text-cyber-pink font-black text-xl sm:text-2xl font-mono">۰ WebView</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">موتور نیتیو کاتلین</div>
+                    </div>
+                    <div class="glass-card p-3 rounded-xl">
+                        <div class="text-cyber-amber font-black text-xl sm:text-2xl font-mono">TLS Frag</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">دور زدن بازرسی DPI</div>
+                    </div>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-2">شبکه ضدسانسور و DPI Bypass</h3>
-                <p class="text-sm text-slate-300 leading-relaxed">
-                    مجهز به فناوری تقطیع پکت TLS (ClientHello Fragmentation)، آی‌پی‌های تمیز Anycast برای جلوگیری از مسمومیت DNS ایران، و قابلیت هدایت خودکار مدیاها از پروکسی فعال تلگرام (MTProto / SOCKS5).
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Architecture & Navigation Tabs -->
-    <section id="architecture" class="py-16 max-w-6xl mx-auto px-4 border-t border-white/5">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-white mb-3">۴ تب بومی در ناوبری شیشه‌ای</h2>
-            <p class="text-slate-400 text-sm max-w-xl mx-auto">دسترسی بدون درنگ به تمامی قابلیت‌ها بدون جابجایی بین اپلیکیشن‌های مختلف</p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="glass-card p-5 rounded-xl border border-cyan-500/20">
-                <div class="text-xs text-cyan-400 font-bold mb-1">تب ۰۱</div>
-                <h4 class="text-lg font-bold text-white mb-2">💬 گفتگوهای تلگرام</h4>
-                <p class="text-xs text-slate-300 leading-relaxed">ورود آنی بدون لودینگ؛ فهرست پیام‌ها، کانال‌ها و گروه‌های تلگرام با انیمیشن‌های روان.</p>
             </div>
 
-            <div class="glass-card p-5 rounded-xl border border-pink-500/20">
-                <div class="text-xs text-pink-400 font-bold mb-1">تب ۰۲</div>
-                <h4 class="text-lg font-bold text-white mb-2">📸 فید اینستاگرام</h4>
-                <p class="text-xs text-slate-300 leading-relaxed">پست‌های جدید دوستان، لایک سریع با دوبار لمس، و فوروارد یک‌کلیکه به چت‌های تلگرام.</p>
-            </div>
-
-            <div class="glass-card p-5 rounded-xl border border-purple-500/20">
-                <div class="text-xs text-purple-400 font-bold mb-1">تب ۰۳</div>
-                <h4 class="text-lg font-bold text-white mb-2">🎬 ریلز (Reels)</h4>
-                <p class="text-xs text-slate-300 leading-relaxed">سوایپ عمودی تمام‌صفحه به سبک تیک‌تاک و ریلز، با کشینگ هوشمند و پخش بدون لگ.</p>
-            </div>
-
-            <div class="glass-card p-5 rounded-xl border border-emerald-500/20">
-                <div class="text-xs text-emerald-400 font-bold mb-1">تب ۰۴</div>
-                <h4 class="text-lg font-bold text-white mb-2">⚙️ تنظیمات و لاگین</h4>
-                <p class="text-xs text-slate-300 leading-relaxed">لاگین رمزنگاری‌شده RSA اینستاگرام، ورود دو مرحله‌ای و تنظیمات پیشرفته شبکه و پروکسی.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section id="download" class="py-20 max-w-4xl mx-auto px-4 text-center">
-        <div class="glass-card p-8 sm:p-12 rounded-3xl border border-cyan-500/30 relative">
-            <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">دانلود آخرین نسخه Fresh</h2>
-            <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8">
-                فایل نصبی بدون نیاز به نصب هیچ‌گونه پیش‌نیاز روی تمامی گوشی‌های اندروید (نسخه ۸.۰ به بالا) به طور مستقل نصب می‌شود.
-            </p>
-
-            <div class="inline-block w-full max-w-md bg-dark-950/70 p-5 rounded-2xl border border-white/5 mb-8 text-right text-xs space-y-2">
-                <div class="flex justify-between border-b border-white/5 pb-2">
-                    <span class="text-slate-400">نام بسته (Package):</span>
-                    <span class="text-cyan-400 font-mono">org.fresh.app</span>
-                </div>
-                <div class="flex justify-between border-b border-white/5 pb-2">
-                    <span class="text-slate-400">نسخه:</span>
-                    <span class="text-white font-mono">v2.0.0 (Build 70899)</span>
-                </div>
-                <div class="flex justify-between border-b border-white/5 pb-2">
-                    <span class="text-slate-400">حجم فایل:</span>
-                    <span class="text-white font-mono">81.05 MB (یونیورسال)</span>
-                </div>
-                <div class="flex justify-between border-b border-white/5 pb-2">
-                    <span class="text-slate-400">معماری‌ها:</span>
-                    <span class="text-emerald-400 font-mono">arm64-v8a + armeabi-v7a</span>
-                </div>
-                <div class="pt-1">
-                    <span class="text-slate-400 block mb-1">کد هش سلامت (SHA-256):</span>
-                    <span class="text-slate-400 font-mono text-[10px] break-all select-all bg-black/40 p-1.5 rounded block">
-                        CCAAF5555E7D00C550CDBD4BA9383779F95EC9F98B6B2877EE732B97831130FF
+            <!-- ======================================================== -->
+            <!-- THE CENTERPIECE: INTERACTIVE LIVE PHONE SIMULATOR        -->
+            <!-- ======================================================== -->
+            <div id="simulator" class="max-w-4xl mx-auto pt-4 pb-12">
+                <div class="text-center mb-8">
+                    <span class="text-xs font-mono font-bold text-cyber-emerald uppercase tracking-widest px-3 py-1 rounded-full bg-cyber-emerald/10 border border-cyber-emerald/20">
+                        Interactive Live Preview
                     </span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-3">شبیه‌ساز تعاملی سوپراپلیکیشن Fresh</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-1">
+                        روی تب‌های زیر گوشی کلیک کنید تا عملکرد واقعی هر بخش را ببینید:
+                    </p>
+                </div>
+
+                <!-- Phone Frame Container -->
+                <div class="relative mx-auto w-full max-w-[340px] sm:max-w-[380px] rounded-[44px] p-3 bg-gradient-to-b from-white/20 via-white/5 to-white/10 shadow-[0_25px_70px_rgba(0,0,0,0.85)] border border-white/15">
+                    <!-- Dynamic Island / Speaker Notch -->
+                    <div class="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-40 flex items-center justify-between px-3 border border-white/5">
+                        <div class="w-2.5 h-2.5 rounded-full bg-void-850 flex items-center justify-center">
+                            <div class="w-1.5 h-1.5 rounded-full bg-blue-900/60"></div>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    </div>
+
+                    <!-- Phone Display Screen -->
+                    <div class="relative w-full h-[580px] bg-void-950 rounded-[34px] overflow-hidden flex flex-col border border-white/10 select-none">
+                        
+                        <!-- Top Mobile Status Bar -->
+                        <div class="pt-2 px-6 pb-1 flex justify-between items-center text-[10px] text-slate-400 bg-void-950 z-30 font-mono">
+                            <span>02:30</span>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-cyber-emerald">5G</span>
+                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.28 19.59 10.58 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                                <span>88%</span>
+                            </div>
+                        </div>
+
+                        <!-- ================= SCREEN 1: TELEGRAM CHATS ================= -->
+                        <div id="screen-telegram" class="screen-view flex-1 flex flex-col bg-void-950">
+                            <!-- Telegram App Bar -->
+                            <div class="px-4 py-2 flex items-center justify-between border-b border-white/5 bg-void-900">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-7 h-7 rounded-lg bg-cyber-blue flex items-center justify-center text-white">
+                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xs font-bold text-white leading-tight">Fresh Telegram</h3>
+                                        <p class="text-[9px] text-cyber-emerald">اتصال امن • بدون پروکسی اضافه</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2 text-slate-400">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                </div>
+                            </div>
+
+                            <!-- Folder Tabs -->
+                            <div class="px-3 py-1.5 flex gap-2 border-b border-white/5 bg-void-950 text-[10px] overflow-x-auto no-scrollbar font-medium">
+                                <span class="px-2.5 py-0.5 rounded-full bg-cyber-blue text-white">همه</span>
+                                <span class="px-2.5 py-0.5 rounded-full text-slate-400 hover:text-white">کانال‌ها</span>
+                                <span class="px-2.5 py-0.5 rounded-full text-slate-400 hover:text-white">شخصی</span>
+                                <span class="px-2.5 py-0.5 rounded-full text-slate-400 hover:text-white">گروه‌ها</span>
+                            </div>
+
+                            <!-- Chat List Mockup -->
+                            <div class="flex-1 overflow-y-auto no-scrollbar divide-y divide-white/5">
+                                <!-- Chat 1 -->
+                                <div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-white/5 transition cursor-pointer">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cyber-emerald to-cyber-cyan flex items-center justify-center font-black text-xs text-black">
+                                            S
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-1">
+                                                <span class="text-xs font-bold text-white">SinaVPN Official</span>
+                                                <svg class="w-3 h-3 text-cyber-cyan fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                            </div>
+                                            <p class="text-[10px] text-slate-400 truncate max-w-[150px]">📦 نسخه v2.5.2 روی سرور قرار گرفت</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right flex flex-col items-end gap-1">
+                                        <span class="text-[9px] text-slate-400 font-mono">02:18</span>
+                                        <span class="w-4 h-4 rounded-full bg-cyber-blue text-[9px] text-white flex items-center justify-center font-bold">۲</span>
+                                    </div>
+                                </div>
+
+                                <!-- Chat 2 -->
+                                <div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-white/5 transition cursor-pointer">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center font-bold text-xs text-white">
+                                            P
+                                        </div>
+                                        <div>
+                                            <span class="text-xs font-bold text-white">Persia Friends</span>
+                                            <p class="text-[10px] text-slate-400 truncate max-w-[150px]">Abolfazl: ویدیو رو دیدی؟ خفنه</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[9px] text-slate-400 font-mono">01:54</span>
+                                    </div>
+                                </div>
+
+                                <!-- Chat 3 -->
+                                <div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-white/5 transition cursor-pointer">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-10 h-10 rounded-full bg-void-800 flex items-center justify-center font-bold text-xs text-cyber-emerald border border-cyber-emerald/30">
+                                            🥷
+                                        </div>
+                                        <div>
+                                            <span class="text-xs font-bold text-white">Struggle</span>
+                                            <p class="text-[10px] text-slate-400 truncate max-w-[150px]">پکت‌های فرگمنت شده تست شدند ✅</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[9px] text-slate-400 font-mono">01:10</span>
+                                    </div>
+                                </div>
+
+                                <!-- Chat 4 -->
+                                <div class="px-3.5 py-2.5 flex items-center justify-between hover:bg-white/5 transition cursor-pointer">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs border border-amber-500/30">
+                                            A
+                                        </div>
+                                        <div>
+                                            <span class="text-xs font-bold text-white">Saved Messages</span>
+                                            <p class="text-[10px] text-slate-400 truncate max-w-[150px]">Fresh-SuperApp.apk (81 MB)</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[9px] text-slate-400 font-mono">دیروز</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= SCREEN 2: INSTAGRAM FEED ================= -->
+                        <div id="screen-instagram" class="screen-view hidden flex-1 flex flex-col bg-void-950">
+                            <!-- Instagram Header -->
+                            <div class="px-3.5 py-2 flex items-center justify-between border-b border-white/5 bg-void-900">
+                                <span class="font-black text-sm italic tracking-tight gradient-ig">Fresh Instagram</span>
+                                <div class="flex items-center gap-3 text-slate-300">
+                                    <svg class="w-4 h-4 cursor-pointer hover:text-pink-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                    <svg class="w-4 h-4 cursor-pointer hover:text-cyber-cyan transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                                </div>
+                            </div>
+
+                            <!-- Stories Tray -->
+                            <div class="py-2 px-3 flex gap-2.5 overflow-x-auto no-scrollbar border-b border-white/5 bg-void-950">
+                                <div class="flex flex-col items-center gap-1 shrink-0">
+                                    <div class="w-11 h-11 rounded-full p-[2px] bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600">
+                                        <div class="w-full h-full rounded-full bg-void-950 flex items-center justify-center font-bold text-[10px] text-white">شما</div>
+                                    </div>
+                                    <span class="text-[8px] text-slate-400">استوری شما</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-1 shrink-0">
+                                    <div class="w-11 h-11 rounded-full p-[2px] bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600">
+                                        <div class="w-full h-full rounded-full bg-cyan-600 flex items-center justify-center font-bold text-[10px] text-white">Sina</div>
+                                    </div>
+                                    <span class="text-[8px] text-slate-400">sinamp00</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-1 shrink-0">
+                                    <div class="w-11 h-11 rounded-full p-[2px] bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600">
+                                        <div class="w-full h-full rounded-full bg-emerald-600 flex items-center justify-center font-bold text-[10px] text-white">Tech</div>
+                                    </div>
+                                    <span class="text-[8px] text-slate-400">iran_tech</span>
+                                </div>
+                            </div>
+
+                            <!-- Feed Post -->
+                            <div class="flex-1 overflow-y-auto no-scrollbar">
+                                <div class="px-3 py-2 flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-cyber-emerald to-cyber-cyan flex items-center justify-center font-bold text-[10px] text-black">F</div>
+                                        <div>
+                                            <span class="text-xs font-bold text-white block leading-tight">fresh.superapp</span>
+                                            <span class="text-[8px] text-slate-400">پروتکل بومی اینستاگرام</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-slate-400 text-xs">•••</span>
+                                </div>
+
+                                <!-- Interactive Post Image with Double-Tap Heart -->
+                                <div id="post-image-box" ondblclick="triggerHeartPop()" class="relative w-full h-44 bg-gradient-to-br from-void-850 via-slate-900 to-void-800 flex items-center justify-center overflow-hidden cursor-pointer group">
+                                    <div class="text-center p-4">
+                                        <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 mx-auto flex items-center justify-center text-cyber-emerald mb-2">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                        </div>
+                                        <p class="text-[10px] text-slate-300 font-medium">سشن اختصاصی بدون وب‌ویو فیلترشده</p>
+                                        <span class="text-[8px] text-cyber-cyan font-mono mt-1 block">دو بار کلیک کنید برای لایک ❤️</span>
+                                    </div>
+
+                                    <!-- Popping Heart -->
+                                    <div id="heart-pop" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
+                                        <svg class="w-16 h-16 text-pink-500 fill-current drop-shadow-xl" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </div>
+                                </div>
+
+                                <!-- Post Action Bar -->
+                                <div class="px-3 py-2 flex items-center justify-between text-slate-300">
+                                    <div class="flex items-center gap-3">
+                                        <svg id="like-icon-btn" onclick="toggleLikeManual()" class="w-4 h-4 cursor-pointer hover:text-pink-500 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                        <svg class="w-4 h-4 cursor-pointer hover:text-cyber-cyan transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                                        <!-- Forward to Telegram -->
+                                        <button onclick="alert('پست مستقیماً برای ارسال به چت‌های تلگرام به اشتراک گذاشته شد!')" class="flex items-center gap-1 text-[9px] text-cyber-cyan hover:underline bg-cyber-blue/15 px-2 py-0.5 rounded-full border border-cyber-cyan/30">
+                                            <span>فوروارد به تلگرام</span>
+                                            <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                                        </button>
+                                    </div>
+                                    <svg class="w-4 h-4 cursor-pointer hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+                                </div>
+
+                                <div class="px-3 pb-2 text-[10px]">
+                                    <span id="like-count" class="font-bold text-white block">۳,۴۹۱ پسند</span>
+                                    <p class="text-slate-300 mt-0.5 leading-relaxed">
+                                        <strong class="text-white">fresh.superapp</strong> تست موفقیت‌آمیز فید نیتیو اینستاگرام با رمزنگاری RSA و لود مستقیم بدون افت کیفیت.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= SCREEN 3: INSTAGRAM REELS ================= -->
+                        <div id="screen-reels" class="screen-view hidden flex-1 flex flex-col bg-black relative overflow-hidden">
+                            <!-- Simulated Fullscreen Reel Video Background -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-void-900/60 to-black/40 flex items-center justify-center">
+                                <div class="text-center p-6">
+                                    <div class="w-16 h-16 rounded-full border-2 border-white/20 bg-white/5 mx-auto flex items-center justify-center text-white backdrop-blur mb-3">
+                                        <svg class="w-8 h-8 fill-current text-cyber-pink" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </div>
+                                    <span class="text-xs font-bold text-white block">Media3 Hardware Player</span>
+                                    <span class="text-[9px] text-slate-400">پخش ویدیو با شتاب سخت‌افزاری پلیر تلگرام</span>
+                                </div>
+                            </div>
+
+                            <!-- Live Equalizer Waves Overlay -->
+                            <div class="absolute top-12 left-4 flex items-end gap-1 h-7">
+                                <div class="w-1 bg-cyber-pink rounded-full eq-bar-1"></div>
+                                <div class="w-1 bg-cyber-purple rounded-full eq-bar-2"></div>
+                                <div class="w-1 bg-cyber-cyan rounded-full eq-bar-3"></div>
+                                <div class="w-1 bg-cyber-emerald rounded-full eq-bar-4"></div>
+                                <span class="text-[8px] font-mono text-slate-400 mr-1.5">AUDIO LIVE</span>
+                            </div>
+
+                            <!-- Floating Action Buttons -->
+                            <div class="absolute bottom-16 left-3 flex flex-col items-center gap-3 text-white">
+                                <div class="flex flex-col items-center gap-0.5">
+                                    <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-pink-500">
+                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </div>
+                                    <span class="text-[9px] font-mono">24.1K</span>
+                                </div>
+
+                                <div class="flex flex-col items-center gap-0.5">
+                                    <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur flex items-center justify-center">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                                    </div>
+                                    <span class="text-[9px] font-mono">842</span>
+                                </div>
+
+                                <div class="flex flex-col items-center gap-0.5">
+                                    <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur flex items-center justify-center">
+                                        <svg class="w-4 h-4 fill-current text-cyber-cyan" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                                    </div>
+                                    <span class="text-[9px] font-mono">اشتراک</span>
+                                </div>
+
+                                <!-- Rotating Disc -->
+                                <div class="w-7 h-7 rounded-full border border-white/20 bg-void-950 p-1 animate-spin-slow mt-1">
+                                    <div class="w-full h-full rounded-full bg-cyber-emerald/40 flex items-center justify-center">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Reel Meta -->
+                            <div class="absolute bottom-2 right-3 left-14 text-right">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <div class="w-6 h-6 rounded-full bg-cyber-pink flex items-center justify-center font-bold text-[9px] text-white">R</div>
+                                    <span class="text-xs font-bold text-white">reels_iran</span>
+                                </div>
+                                <p class="text-[10px] text-slate-200 line-clamp-2 leading-relaxed">
+                                    سوایپ عمودی بی‌نهایت با پشتیبانی کامل از PagerSnapHelper و کشینگ خودکار قطعات ویدیو 🚀
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- ================= SCREEN 4: STEALTH CORE ================= -->
+                        <div id="screen-stealth" class="screen-view hidden flex-1 flex flex-col bg-void-950 p-4 overflow-y-auto no-scrollbar">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
+                                <div>
+                                    <h4 class="text-xs font-bold text-white">هسته ضدسانسور Fresh</h4>
+                                    <p class="text-[9px] text-cyber-emerald">بای‌پس فایروال ملی بدون قطعی</p>
+                                </div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-cyber-emerald animate-ping"></div>
+                            </div>
+
+                            <!-- Live Ping Pill -->
+                            <div class="glass-card p-3 rounded-xl mb-3 flex items-center justify-between border-cyber-emerald/30">
+                                <div>
+                                    <span class="text-[10px] text-slate-400 block">پینگ اتصال مستقیم به Meta:</span>
+                                    <span class="text-sm font-mono font-bold text-cyber-emerald">۲۴ ms (Clean Anycast)</span>
+                                </div>
+                                <div class="text-xs font-mono bg-cyber-emerald/10 text-cyber-emerald px-2 py-1 rounded-md border border-cyber-emerald/20">
+                                    OPTIMAL
+                                </div>
+                            </div>
+
+                            <!-- Toggles Mockup -->
+                            <div class="space-y-2.5 text-xs">
+                                <div class="flex items-center justify-between p-2 rounded-lg bg-void-900 border border-white/5">
+                                    <div>
+                                        <span class="font-medium text-white block text-[11px]">شکستن پکت TLS (DPI Bypass)</span>
+                                        <span class="text-[9px] text-slate-400">تقطیع ۲۴ بایتی ClientHello</span>
+                                    </div>
+                                    <div class="w-8 h-4 rounded-full bg-cyber-emerald p-0.5 flex justify-end">
+                                        <div class="w-3 h-3 rounded-full bg-black shadow"></div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between p-2 rounded-lg bg-void-900 border border-white/5">
+                                    <div>
+                                        <span class="font-medium text-white block text-[11px]">Clean Anycast DNS</span>
+                                        <span class="text-[9px] text-slate-400">فیلتر آی‌پی ۱۰.۱۰.۳۴.۳۴</span>
+                                    </div>
+                                    <div class="w-8 h-4 rounded-full bg-cyber-emerald p-0.5 flex justify-end">
+                                        <div class="w-3 h-3 rounded-full bg-black shadow"></div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between p-2 rounded-lg bg-void-900 border border-white/5">
+                                    <div>
+                                        <span class="font-medium text-white block text-[11px]">پل پروکسی تلگرام</span>
+                                        <span class="text-[9px] text-slate-400">استفاده از MTProto / SOCKS5</span>
+                                    </div>
+                                    <div class="w-8 h-4 rounded-full bg-cyber-emerald p-0.5 flex justify-end">
+                                        <div class="w-3 h-3 rounded-full bg-black shadow"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Live Packet Fragment Visualizer -->
+                            <div class="mt-3 p-2.5 rounded-lg bg-black border border-white/5 text-[9px] font-mono text-slate-400 space-y-1">
+                                <div class="flex justify-between text-cyber-cyan font-bold">
+                                    <span>STREAM LOG</span>
+                                    <span>ACTIVE</span>
+                                </div>
+                                <div class="text-emerald-400 truncate">» [TLS-SPLIT] 24 bytes sent (offset=0)</div>
+                                <div class="text-slate-500 truncate">» [DELAY] 6ms latency buffer applied</div>
+                                <div class="text-emerald-400 truncate">» [TLS-CLIENT-HELLO] Handshake bypassed DPI</div>
+                            </div>
+                        </div>
+
+                        <!-- ================= GLASS BOTTOM TAB BAR ================= -->
+                        <div class="mt-auto px-2 py-2 bg-void-900/90 backdrop-blur-md border-t border-white/10 flex items-center justify-around z-30">
+                            <!-- Tab 1 Button -->
+                            <button onclick="switchTab('telegram')" id="tab-btn-telegram" class="tab-button flex flex-col items-center gap-0.5 text-cyber-emerald transition">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                                <span class="text-[9px] font-bold">تلگرام</span>
+                            </button>
+
+                            <!-- Tab 2 Button -->
+                            <button onclick="switchTab('instagram')" id="tab-btn-instagram" class="tab-button flex flex-col items-center gap-0.5 text-slate-400 hover:text-white transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                <span class="text-[9px]">فید</span>
+                            </button>
+
+                            <!-- Tab 3 Button -->
+                            <button onclick="switchTab('reels')" id="tab-btn-reels" class="tab-button flex flex-col items-center gap-0.5 text-slate-400 hover:text-white transition">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+                                <span class="text-[9px]">ریلز</span>
+                            </button>
+
+                            <!-- Tab 4 Button -->
+                            <button onclick="switchTab('stealth')" id="tab-btn-stealth" class="tab-button flex flex-col items-center gap-0.5 text-slate-400 hover:text-white transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                <span class="text-[9px]">ضدسانسور</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh-SuperApp.apk" class="glow-btn w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-emerald-400 text-slate-950 font-bold px-8 py-4 rounded-xl hover:scale-105 active:scale-95 transition flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
-                    <span>دانلود مستقیم Fresh-SuperApp.apk</span>
-                </a>
-                <a href="https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh.apk" class="w-full sm:w-auto glass-card hover:bg-white/10 text-white font-semibold px-6 py-4 rounded-xl transition flex items-center justify-center gap-2">
-                    <span>لینک دانلود کمکی (Fresh.apk)</span>
-                </a>
+        <!-- ======================================================== -->
+        <!-- LIVE DPI BYPASS LAB (INTERACTIVE EXPERIMENT)             -->
+        <!-- ======================================================== -->
+        <section id="stealth" class="py-16 max-w-5xl mx-auto px-4 border-t border-white/5">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl border-cyber-cyan/30 relative overflow-hidden">
+                <div class="max-w-2xl mb-8">
+                    <span class="text-xs font-mono text-cyber-cyan font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-cyber-cyan/10 border border-cyber-cyan/30">
+                        Interactive Security Lab
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-3 mb-2">
+                        آزمایشگاه زندهٔ شکستن پکت و عبور از فایروال DPI
+                    </h3>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                        ببینید که فایروال‌های همراه اول و ایرانسل چگونه اتصالات را مسدود می‌کنند و تکه‌تکه کردن بسته در سوپراپلیکیشن Fresh چگونه آنها را دور می‌زند:
+                    </p>
+                </div>
+
+                <!-- Interactive DPI Sandbox Switcher -->
+                <div class="flex flex-wrap items-center gap-3 mb-6">
+                    <button onclick="runDpiTest(false)" id="test-normal-btn" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-white/10 text-white border border-white/10 hover:bg-white/15">
+                        ۱. تست در حالت عادی (اپلیکیشن‌های استاندارد)
+                    </button>
+                    <button onclick="runDpiTest(true)" id="test-fresh-btn" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-cyber-emerald text-void-950 shadow-lg shadow-cyber-emerald/20 hover:bg-cyber-cyan">
+                        ۲. تست با الگوریتم Sina-Stealth در Fresh
+                    </button>
+                </div>
+
+                <!-- Simulation Visual Board -->
+                <div class="grid md:grid-cols-3 gap-4 font-mono text-xs">
+                    <!-- Client -->
+                    <div class="p-4 rounded-xl bg-void-950 border border-white/10">
+                        <span class="text-slate-400 block text-[10px] mb-1">CLIENT (گوشی شما)</span>
+                        <div id="sim-client-status" class="text-sm font-bold text-white">آماده ارسال پکت...</div>
+                        <div id="sim-packet-desc" class="text-[11px] text-slate-400 mt-2">
+                            بستهٔ هندشیک اولیه TLS ClientHello
+                        </div>
+                    </div>
+
+                    <!-- Firewall / DPI -->
+                    <div class="p-4 rounded-xl bg-void-950 border border-white/10 relative">
+                        <span class="text-slate-400 block text-[10px] mb-1">DPI INSPECTION (سیستم فیلترینگ)</span>
+                        <div id="sim-firewall-status" class="text-sm font-bold text-cyber-amber">در انتظار تحلیل بسته...</div>
+                        <div id="sim-firewall-detail" class="text-[11px] text-slate-400 mt-2">
+                            بررسی نام دامنه (SNI) در هدر پکت
+                        </div>
+                    </div>
+
+                    <!-- Server / Meta -->
+                    <div class="p-4 rounded-xl bg-void-950 border border-white/10">
+                        <span class="text-slate-400 block text-[10px] mb-1">TARGET SERVER (سرور اینستاگرام)</span>
+                        <div id="sim-target-status" class="text-sm font-bold text-slate-400">در انتظار برقراری تانل...</div>
+                        <div id="sim-target-detail" class="text-[11px] text-slate-400 mt-2">
+                            Clean Anycast (157.240.241.174)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Alert Box -->
+                <div id="sim-result-box" class="mt-4 p-4 rounded-xl bg-cyber-emerald/10 border border-cyber-emerald/30 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-cyber-emerald text-void-950 flex items-center justify-center font-bold">✓</div>
+                        <div>
+                            <span class="text-xs font-bold text-white block">نتیجه: عبور امن و بدون شناسایی (Clean Bypass)</span>
+                            <span class="text-[11px] text-cyber-emerald">پکت اولیه به ۲۴ بایت خرد شد و فایروال قادر به استخراج SNI نگردید.</span>
+                        </div>
+                    </div>
+                    <span class="text-xs font-mono text-cyber-emerald font-bold">200 OK</span>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- CORE ARCHITECTURE PILLARS                                -->
+        <!-- ======================================================== -->
+        <section id="architecture" class="py-16 max-w-5xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-xs font-mono text-cyber-emerald font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-cyber-emerald/10 border border-cyber-emerald/20">
+                    Native Engineering
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white mt-3 mb-2">معماری یکپارچه و عاری از کدهای مخرب</h2>
+                <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
+                    چرا Fresh پایدارترین تجربهٔ سوپراپلیکیشن اندروید را بدون افت کیفیت ارائه می‌دهد؟
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card p-6 rounded-2xl group">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-blue/15 text-cyber-blue flex items-center justify-center mb-5 group-hover:scale-110 transition border border-cyber-blue/30">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">هستهٔ رسمی تلگرام بدون باگ سیاه</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        تمام دستکاری‌های غیراستاندارد OLED که باعث سیاه شدن صفحه در دارک‌مود می‌شدند حذف شدند. تم‌های کارخانه‌ای تلگرام (Classic Blue، Day، Dark Blue، Night) با همان سرعت و هماهنگی نسخه رسمی اجرا می‌شوند.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-6 rounded-2xl group">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-pink/15 text-cyber-pink flex items-center justify-center mb-5 group-hover:scale-110 transition border border-cyber-pink/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">رمزنگاری اختصاصی RSA و AES</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        ورود به حساب اینستاگرام بدون واسطه و با الگوریتم رسمی اینستاگرام (<span class="font-mono text-cyber-pink">#PWD_INSTAGRAM:4:...</span>) و امضای دیجیتال HMAC انجام می‌گیرد؛ بدون لو رفتن پسورد یا نقض سیاست‌های امنیتی.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-6 rounded-2xl group">
+                    <div class="w-12 h-12 rounded-xl bg-cyber-emerald/15 text-cyber-emerald flex items-center justify-center mb-5 group-hover:scale-110 transition border border-cyber-emerald/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">پلیر سخت‌افزاری Media3 برای ریلز</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        ریلزها با استفاده از پلیر بومی تلگرام بر پایه Media3 با کمترین مصرف باتری و نهایت شتاب پردازنده گرافیکی (GPU) پخش می‌شوند؛ همراه با کش هوشمند قطعات ویدیو و عدم اتلاف ترافیک اینترنت.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- COMPARISON TABLE: FRESH VS OTHERS                        -->
+        <!-- ======================================================== -->
+        <section id="compare" class="py-16 max-w-5xl mx-auto px-4 border-t border-white/5">
+            <div class="text-center mb-10">
+                <span class="text-xs font-mono text-cyber-emerald font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-cyber-emerald/10 border border-cyber-emerald/20">
+                    Transparent Benchmark
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-3 mb-2">مقایسه فنی Fresh v2.0 با سایر کلاینت‌ها</h2>
+                <p class="text-slate-400 text-xs sm:text-sm">چرا رویکرد هیبریدی نیتیو تفاوت رقم می‌زند؟</p>
+            </div>
+
+            <div class="glass-card rounded-2xl overflow-hidden border border-white/10">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs">
+                        <thead class="bg-void-900 border-b border-white/10 text-slate-300">
+                            <tr>
+                                <th class="p-3.5 sm:p-4">ویژگی / معیار ارزیابی</th>
+                                <th class="p-3.5 sm:p-4 text-cyber-emerald font-bold">سوپراپلیکیشن Fresh v2.0</th>
+                                <th class="p-3.5 sm:p-4 text-slate-400">کلاینت‌های غیررسمی با WebView</th>
+                                <th class="p-3.5 sm:p-4 text-slate-400">اپ‌های مود شده با هک OLED</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5 text-slate-300">
+                            <tr>
+                                <td class="p-3.5 sm:p-4 font-medium text-white">سازگاری با حالت شب (Dark Mode)</td>
+                                <td class="p-3.5 sm:p-4 text-cyber-emerald font-bold">✓ ۱۰۰٪ رسمی بدون سیاهی صفحه</td>
+                                <td class="p-3.5 sm:p-4 text-slate-400">وابسته به وب‌ویو و لود ناقص</td>
+                                <td class="p-3.5 sm:p-4 text-pink-400">❌ صفحه کاملاً سیاه و غیرقابل خواندن</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 sm:p-4 font-medium text-white">اتصال به اینستاگرام بدون فیلترشکن</td>
+                                <td class="p-3.5 sm:p-4 text-cyber-emerald font-bold">✓ پروتکل مستقل با تقطیع TLS</td>
+                                <td class="p-3.5 sm:p-4 text-pink-400">❌ درجا خطای فیلترینگ و مسدودی</td>
+                                <td class="p-3.5 sm:p-4 text-slate-400">نیازمند فعال‌بودن VPN خارجی</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 sm:p-4 font-medium text-white">سرعت لود نخست برنامه (Cold Launch)</td>
+                                <td class="p-3.5 sm:p-4 text-cyber-emerald font-bold">⚡ آنی روی تب چت‌های تلگرام (۰s)</td>
+                                <td class="p-3.5 sm:p-4 text-slate-400">⏱️ ۳ الی ۵ ثانیه معطلی در لودینگ</td>
+                                <td class="p-3.5 sm:p-4 text-slate-400">لگ در اعمال استایل‌های سفارشی</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 sm:p-4 font-medium text-white">اشتراک‌گذاری مستقیم محتوا</td>
+                                <td class="p-3.5 sm:p-4 text-cyber-emerald font-bold">✓ فوروارد یک‌کلیکه به چت‌ها و کانال‌ها</td>
+                                <td class="p-3.5 sm:p-4 text-pink-400">❌ نیاز به کپی لینک و خروج از برنامه</td>
+                                <td class="p-3.5 sm:p-4 text-slate-400">محدود و نیازمند ذخیره در حافظه</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 sm:p-4 font-medium text-white">مصرف باتری و حافظه رم</td>
+                                <td class="p-3.5 sm:p-4 text-cyber-emerald font-bold">🟢 بهینه (یک پروسس اختصاصی تلگرام)</td>
+                                <td class="p-3.5 sm:p-4 text-pink-400">🔴 بسیار بالا (پروسس‌های سنگین وب‌ویو)</td>
+                                <td class="p-3.5 sm:p-4 text-slate-400">متوسط</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- DOWNLOAD STATION (HUB)                                   -->
+        <!-- ======================================================== -->
+        <section id="download" class="py-20 max-w-4xl mx-auto px-4 text-center">
+            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-cyber-emerald/30 relative overflow-hidden">
+                <div class="absolute -top-24 -left-24 w-60 h-60 bg-cyber-emerald/15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -right-24 w-60 h-60 bg-cyber-cyan/15 rounded-full blur-3xl pointer-events-none"></div>
+
+                <span class="text-xs font-mono font-bold text-cyber-emerald uppercase tracking-widest px-3.5 py-1 rounded-full bg-cyber-emerald/10 border border-cyber-emerald/30 mb-4 inline-block">
+                    Official Universal Build
+                </span>
+
+                <h2 class="text-3xl sm:text-4xl font-black text-white mb-3">دانلود سوپراپلیکیشن Fresh v2.0</h2>
+                <p class="text-slate-300 text-xs sm:text-sm max-w-xl mx-auto mb-8 leading-relaxed">
+                    فایل پکیج یونیورسال شامل معماری‌های ۶۴ بیتی (`arm64-v8a`) و ۳۲ بیتی (`armeabi-v7a`)، سازگار با اندروید ۸.۰ به بالا بدون پیش‌نیاز.
+                </p>
+
+                <!-- Technical Badge Card -->
+                <div class="w-full max-w-md mx-auto bg-void-950/80 p-5 rounded-2xl border border-white/10 mb-8 text-right text-xs space-y-2.5 font-mono">
+                    <div class="flex justify-between border-b border-white/5 pb-2">
+                        <span class="text-slate-400 font-vazir">نام بسته (Package):</span>
+                        <span class="text-cyber-cyan font-bold">org.fresh.app</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/5 pb-2">
+                        <span class="text-slate-400 font-vazir">نسخه برنامه:</span>
+                        <span class="text-white">v2.0.0 (Build 70899)</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/5 pb-2">
+                        <span class="text-slate-400 font-vazir">حجم فایل:</span>
+                        <span class="text-cyber-emerald font-bold">81.05 MB (Universal APK)</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/5 pb-2">
+                        <span class="text-slate-400 font-vazir">سازگاری:</span>
+                        <span class="text-white">Android 8.0+ (Oreo, 9, 10, 11, 12, 13, 14, 15)</span>
+                    </div>
+                    <div class="pt-1 text-right">
+                        <span class="text-slate-400 block mb-1 font-vazir text-[11px]">کد اعتبارسنجی سلامت فایل (SHA-256):</span>
+                        <span class="text-slate-400 text-[10px] break-all select-all bg-black/60 p-2 rounded-lg block border border-white/5 font-mono">
+                            CCAAF5555E7D00C550CDBD4BA9383779F95EC9F98B6B2877EE732B97831130FF
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Primary Download CTA -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh-SuperApp.apk" class="glow-emerald w-full sm:w-auto bg-gradient-to-r from-cyber-emerald to-cyber-cyan text-void-950 font-black px-9 py-4 rounded-xl hover:scale-105 active:scale-95 transition flex items-center justify-center gap-2.5 text-base shadow-xl">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                        <span>دانلود مستقیم Fresh-SuperApp.apk</span>
+                    </a>
+
+                    <a href="https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh.apk" class="w-full sm:w-auto glass-card hover:bg-white/10 text-white font-semibold px-6 py-4 rounded-xl transition flex items-center justify-center gap-2 text-sm border-white/10">
+                        <span>لینک کمکی (Fresh.apk)</span>
+                    </a>
+                </div>
+
+                <div class="mt-6 text-xs text-slate-500 flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4 text-cyber-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    <span>تست‌شده روی چیپست‌های Snapdragon، Dimensity، Exynos و Tensor بدون کرش</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- FAQ ACCORDION                                            -->
+        <!-- ======================================================== -->
+        <section id="faq" class="py-16 max-w-3xl mx-auto px-4 border-t border-white/5">
+            <div class="text-center mb-10">
+                <span class="text-xs font-mono text-cyber-emerald font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-cyber-emerald/10 border border-cyber-emerald/20">
+                    FAQ
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">پرسش‌های متداول کاربران</h2>
+                <p class="text-slate-400 text-xs sm:text-sm">پاسخ شفاف به پرتکرارترین سؤالات درباره نسخهٔ جدید</p>
+            </div>
+
+            <div class="space-y-3">
+                <div class="glass-card p-4 rounded-xl">
+                    <h4 class="text-sm font-bold text-white mb-1.5 flex items-center gap-2">
+                        <span class="text-cyber-emerald">●</span> آیا مشکل سیاه شدن صفحه در حالت دارک‌مود کاملاً حل شده است؟
+                    </h4>
+                    <p class="text-xs text-slate-300 leading-relaxed pr-4">
+                        بله، به طور ۱۰۰٪. تمامی کدهای غیراستاندارد OLED و بازنویسی‌های رنگی معیوب پاک‌سازی شدند. اکنون تم‌های رسمی تلگرام (Dark Blue و Night) دقیقاً مشابه نسخه اصلی اجرا شده و با لمس کلید دارک‌مود، هیچ بخشی سیاه مطلق یا ناخوانا نمی‌شود.
+                    </p>
+                </div>
+
+                <div class="glass-card p-4 rounded-xl">
+                    <h4 class="text-sm font-bold text-white mb-1.5 flex items-center gap-2">
+                        <span class="text-cyber-emerald">●</span> آیا این نسخه اکانت اینستاگرام را با خطر مواجه می‌کند؟
+                    </h4>
+                    <p class="text-xs text-slate-300 leading-relaxed pr-4">
+                        خیر. ورود به حساب با پروتکل رسمی و کلید عمومی اینستاگرام (رمزنگاری RSA و AES-GCM به همراه امضای HMAC-SHA256) انجام می‌گیرد و سشن‌ها به صورت امن در حافظه محلی دستگاه نگهداری می‌شوند.
+                    </p>
+                </div>
+
+                <div class="glass-card p-4 rounded-xl">
+                    <h4 class="text-sm font-bold text-white mb-1.5 flex items-center gap-2">
+                        <span class="text-cyber-emerald">●</span> آیا این اپلیکیشن در کنار تلگرام اصلی یا اینستاگرام قابل نصب است؟
+                    </h4>
+                    <p class="text-xs text-slate-300 leading-relaxed pr-4">
+                        بله. به دلیل پکیج نیم اختصاصی (<span class="font-mono text-cyber-cyan">org.fresh.app</span>)، این برنامه یک کلاینت کاملاً مستقل بوده و به هیچ وجه جایگزین تلگرام یا اینستاگرام پیش‌فرض گوشی شما نمی‌شود.
+                    </p>
+                </div>
+
+                <div class="glass-card p-4 rounded-xl">
+                    <h4 class="text-sm font-bold text-white mb-1.5 flex items-center gap-2">
+                        <span class="text-cyber-emerald">●</span> نحوه فعال‌سازی پروکسی تلگرام برای ترافیک اینستاگرام چگونه است؟
+                    </h4>
+                    <p class="text-xs text-slate-300 leading-relaxed pr-4">
+                        در تب چهارم (تنظیمات)، گزینهٔ <strong class="text-white">Telegram Proxy Bridge</strong> به صورت خودکار ترافیک دانلود تصاویر و پخش ریلزها را از پروکسی فعال MTProto یا SOCKS5 تلگرام شما عبور می‌دهد.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-white/5 text-center text-xs text-slate-500">
-        <p>سوپراپلیکیشن Fresh — توسعه‌یافته با کلاینت رسمی تلگرام و پروتکل بومی اینستاگرام</p>
-        <p class="mt-2 text-slate-600">متن‌باز تحت پروانه عمومی GPLv2 • مخزن رسمی در <a href="https://github.com/sinamp00/Fresh" class="text-cyan-400 hover:underline">GitHub</a></p>
+    <footer class="py-10 border-t border-white/5 bg-void-950 text-center text-xs text-slate-400">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-cyber-emerald to-cyber-cyan flex items-center justify-center font-black text-black text-[10px]">
+                    FR
+                </div>
+                <span class="text-white font-bold">Fresh Super-App v2.0</span>
+            </div>
+
+            <p class="text-slate-500 text-[11px]">
+                توسعه‌یافته بر پایه کلاینت رسمی تلگرام و پروتکل معکوس اینستاگرام • متن‌باز (GPLv2)
+            </p>
+
+            <a href="https://github.com/sinamp00/Fresh" target="_blank" class="hover:text-cyber-emerald transition flex items-center gap-1.5">
+                <span>sinamp00/Fresh</span>
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+        </div>
     </footer>
 
+    <!-- ======================================================== -->
+    <!-- QR CODE MODAL                                            -->
+    <!-- ======================================================== -->
+    <div id="qr-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="glass-card p-6 sm:p-8 rounded-3xl max-w-sm w-full text-center border-cyber-emerald/40 relative shadow-2xl">
+            <button onclick="closeQrModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white p-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h3 class="text-lg font-bold text-white mb-2">اسکن مستقیم جهت دانلود</h3>
+            <p class="text-xs text-slate-400 mb-6">دوربین گوشی خود را روبروی بارکد زیر بگیرید:</p>
+
+            <div class="p-3 bg-void-950 rounded-2xl border border-white/10 inline-block mb-6 shadow-inner">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh-SuperApp.apk&bgcolor=030407&color=00F5A0" alt="QR Code" class="w-48 h-48 rounded-xl">
+            </div>
+
+            <div class="text-[11px] font-mono text-cyber-cyan truncate">Fresh-SuperApp.apk (81 MB)</div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-xl bg-cyber-emerald text-void-950 font-bold text-xs shadow-2xl transition-all duration-300 transform translate-y-16 opacity-0 flex items-center gap-2">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        <span id="toast-text">کپی شد!</span>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- INTERACTIVE JAVASCRIPT LOGIC                             -->
+    <!-- ======================================================== -->
+    <script>
+        // 1. Phone Simulator Tab Switcher
+        function switchTab(tab) {
+            const screens = ['telegram', 'instagram', 'reels', 'stealth'];
+            screens.forEach(s => {
+                const el = document.getElementById('screen-' + s);
+                const btn = document.getElementById('tab-btn-' + s);
+                if (s === tab) {
+                    el.classList.remove('hidden');
+                    btn.classList.add('text-cyber-emerald');
+                    btn.classList.remove('text-slate-400');
+                } else {
+                    el.classList.add('hidden');
+                    btn.classList.remove('text-cyber-emerald');
+                    btn.classList.add('text-slate-400');
+                }
+            });
+        }
+
+        // 2. Instagram Like and Double Tap
+        let isLiked = false;
+        function triggerHeartPop() {
+            const pop = document.getElementById('heart-pop');
+            pop.classList.remove('opacity-0');
+            pop.classList.add('animate-heart-pop');
+            setTimeout(() => {
+                pop.classList.remove('animate-heart-pop');
+                pop.classList.add('opacity-0');
+            }, 800);
+
+            if (!isLiked) {
+                toggleLikeManual();
+            }
+        }
+
+        function toggleLikeManual() {
+            isLiked = !isLiked;
+            const btn = document.getElementById('like-icon-btn');
+            const count = document.getElementById('like-count');
+            if (isLiked) {
+                btn.classList.add('text-pink-500', 'fill-current');
+                count.innerText = '۳,۴۹۲ پسند';
+                showToast('پست لایک شد ❤️');
+            } else {
+                btn.classList.remove('text-pink-500', 'fill-current');
+                count.innerText = '۳,۴۹۱ پسند';
+            }
+        }
+
+        // 3. Interactive DPI Bypass Sandbox Test
+        function runDpiTest(isFresh) {
+            const client = document.getElementById('sim-client-status');
+            const firewall = document.getElementById('sim-firewall-status');
+            const target = document.getElementById('sim-target-status');
+            const box = document.getElementById('sim-result-box');
+            const nBtn = document.getElementById('test-normal-btn');
+            const fBtn = document.getElementById('test-fresh-btn');
+
+            if (isFresh) {
+                fBtn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition bg-cyber-emerald text-void-950 shadow-lg shadow-cyber-emerald/20 hover:bg-cyber-cyan';
+                nBtn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition bg-white/10 text-white border border-white/10 hover:bg-white/15';
+
+                client.innerText = 'شکستن بسته به ۲۴ بایت';
+                client.className = 'text-sm font-bold text-cyber-emerald';
+                firewall.innerText = 'عدم تطابق با الگوی SNI';
+                firewall.className = 'text-sm font-bold text-cyber-cyan';
+                target.innerText = 'تانل امن برقرار شد (Clean Anycast)';
+                target.className = 'text-sm font-bold text-cyber-emerald';
+
+                box.className = 'mt-4 p-4 rounded-xl bg-cyber-emerald/10 border border-cyber-emerald/30 flex items-center justify-between';
+                box.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-cyber-emerald text-void-950 flex items-center justify-center font-bold">✓</div>
+                        <div>
+                            <span class="text-xs font-bold text-white block">نتیجه: عبور موفق با الگوریتم Sina-Stealth</span>
+                            <span class="text-[11px] text-cyber-emerald">بسته اولیه تکه‌تکه شد، تأخیر ۶ میلی‌ثانیه‌ای اعمال شد و فایروال متوجه درخواست نشد.</span>
+                        </div>
+                    </div>
+                    <span class="text-xs font-mono text-cyber-emerald font-bold">200 OK</span>
+                `;
+            } else {
+                nBtn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition bg-pink-500 text-white shadow-lg shadow-pink-500/20';
+                fBtn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition bg-white/10 text-white border border-white/10 hover:bg-white/15';
+
+                client.innerText = 'ارسال ClientHello پیوسته (۱۵۰۰ بایت)';
+                client.className = 'text-sm font-bold text-white';
+                firewall.innerText = 'کشف SNI: instagram.com (مسدود شد)';
+                firewall.className = 'text-sm font-bold text-pink-500';
+                target.innerText = 'عدم دریافت ترافیک (Connection Reset)';
+                target.className = 'text-sm font-bold text-slate-500';
+
+                box.className = 'mt-4 p-4 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-between';
+                box.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-pink-500 text-white flex items-center justify-center font-bold">✕</div>
+                        <div>
+                            <span class="text-xs font-bold text-white block">نتیجه: مسدودی توسط فایروال DPI</span>
+                            <span class="text-[11px] text-pink-400">به دلیل عدم تکه‌تکه شدن بسته، بازرسی عمیق پکت نام دامنه را خوانده و اتصال را قطع کرد.</span>
+                        </div>
+                    </div>
+                    <span class="text-xs font-mono text-pink-500 font-bold">RST / TIMEOUT</span>
+                `;
+            }
+        }
+
+        // 4. Copy Hash to Clipboard
+        function copyHash() {
+            const hash = 'CCAAF5555E7D00C550CDBD4BA9383779F95EC9F98B6B2877EE732B97831130FF';
+            navigator.clipboard.writeText(hash).then(() => {
+                document.getElementById('copy-text').innerText = 'کپی شد!';
+                showToast('کد هش SHA-256 در کلیپ‌بورد کپی شد ✅');
+                setTimeout(() => {
+                    document.getElementById('copy-text').innerText = 'کپی SHA-256';
+                }, 2500);
+            });
+        }
+
+        // 5. QR Modal Handling
+        function openQrModal() {
+            const modal = document.getElementById('qr-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        function closeQrModal() {
+            const modal = document.getElementById('qr-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // 6. Toast Notification Trigger
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').innerText = msg;
+            toast.classList.remove('translate-y-16', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-16', 'opacity-0');
+            }, 3000);
+        }
+
+        // 7. Interactive Background Cyber Canvas
+        (function initCanvas() {
+            const canvas = document.getElementById('cyber-canvas');
+            const ctx = canvas.getContext('2d');
+            let w, h;
+            const points = [];
+            const count = 35;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            for (let i = 0; i < count; i++) {
+                points.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    r: Math.random() * 1.5 + 0.5
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                for (let i = 0; i < count; i++) {
+                    const p = points[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > w) p.vx *= -1;
+                    if (p.y < 0 || p.y > h) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(0, 245, 160, 0.4)';
+                    ctx.fill();
+
+                    for (let j = i + 1; j < count; j++) {
+                        const p2 = points[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 140) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(0, 245, 255, ${0.15 * (1 - dist / 140)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+    </script>
 </body>
 </html>
