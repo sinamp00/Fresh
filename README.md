@@ -1,46 +1,60 @@
-## Telegram messenger for Android
+# 🌟 Fresh Super-App v2.0 (تلگرام رسمی + اینستاگرام بومی + ضدسانسور)
 
-[Telegram](https://telegram.org) is a messaging app with a focus on speed and security. It’s superfast, simple and free.
-This repo contains the official source code for [Telegram App for Android](https://play.google.com/store/apps/details?id=org.telegram.messenger).
+<div dir="rtl">
 
-## Creating your Telegram Application
+[![Release](https://img.shields.io/github/v/release/sinamp00/Fresh?color=00F5A0&label=Latest%20Version&style=for-the-badge)](https://github.com/sinamp00/Fresh/releases/latest)
+[![Platform](https://img.shields.io/badge/Platform-Android%208.0%2B-00F5FF?style=for-the-badge)](https://github.com/sinamp00/Fresh)
+[![License](https://img.shields.io/badge/License-GPLv2-B388FF?style=for-the-badge)](https://github.com/sinamp00/Fresh)
+[![Website](https://img.shields.io/badge/Website-Live%20Page-FFB300?style=for-the-badge)](https://sinamp00.github.io/Fresh/)
 
-We welcome all developers to use our API and source code to create applications on our platform.
-There are several things we require from **all developers** for the moment.
+**Fresh** یک سوپراپلیکیشن بومی نسل نوین برای اندروید است که کلاینت رسمی تلگرام (v12.10.3) را با موتور مهندسی‌معکوس‌شدهٔ پروتکل اینستاگرام و شبکه ضدسانسور تلفیق کرده است. این اپلیکیشن بدون نیاز به فیلترشکن جانبی یا وب‌ویوهای مسدودشده، دسترسی پایدار به امکانات تلگرام و اینستاگرام را فراهم می‌سازد.
 
-1. [**Obtain your own api_id**](https://core.telegram.org/api/obtaining_api_id) for your application.
-2. Please **do not** use the name Telegram for your app — or make sure your users understand that it is unofficial.
-3. Kindly **do not** use our standard logo (white paper plane in a blue circle) as your app's logo.
-3. Please study our [**security guidelines**](https://core.telegram.org/mtproto/security_guidelines) and take good care of your users' data and privacy.
-4. Please remember to publish **your** code too in order to comply with the licences.
+---
 
-### API, Protocol documentation
+## 📥 لینک‌های دانلود مستقیم نسخه رسمی (v2.0.0)
 
-Telegram API manuals: https://core.telegram.org/api
+| نسخه فایل | نوع معماری پردازنده | حجم فایل | لینک دانلود مستقیم |
+| :--- | :--- | :--- | :--- |
+| **Fresh-SuperApp.apk** | تمامی پردازنده‌ها (arm64-v8a + armeabi-v7a) | ۸۱.۰۵ مگابایت | [📥 دانلود مستقیم Fresh-SuperApp.apk](https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh-SuperApp.apk) |
+| **Fresh.apk** | لینک کمکی (Universal) | ۸۱.۰۵ مگابایت | [📥 دانلود مستقیم Fresh.apk](https://github.com/sinamp00/Fresh/releases/download/v2.0.0/Fresh.apk) |
 
-MTproto protocol manuals: https://core.telegram.org/mtproto
+> 🌐 **وب‌سایت رسمی سوپراپلیکیشن**: [https://sinamp00.github.io/Fresh/](https://sinamp00.github.io/Fresh/)  
+> 📦 **مشاهده Release در گیت‌هاب**: [https://github.com/sinamp00/Fresh/releases/tag/v2.0.0](https://github.com/sinamp00/Fresh/releases/tag/v2.0.0)
 
-### Compilation Guide
+---
 
-**Note**: In order to support [reproducible builds](https://core.telegram.org/reproducible-builds), this repo contains dummy release.keystore,  google-services.json and filled variables inside BuildVars.java. Before publishing your own APKs please make sure to replace all these files with your own.
+## ✨ ویژگی‌های برجسته نسخه ۲.۰
 
-You will require Android Studio 2025.1.4, Android NDK 27.2.12479018 and Android SDK 36.
+### ۱. هسته رسمی تلگرام (بدون دستکاری رنگ‌ها و تم‌ها)
+- مبتنی بر آخرین سورس کد رسمی تلگرام اندروید (v12.10.3).
+- حفظ ۱۰۰٪ تم‌های کارخانه‌ای (**Classic Blue**, **Day**, **Dark Blue**, **Night**).
+- بدون قطعی یا سیاهی صفحه هنگام تعویض به حالت شب (Dark Mode).
+- ورود فوری به فهرست چت‌ها (`DialogsActivity`) بدون هیچ صفحه خالی یا لودینگ مسدود.
 
-1. Clone the Telegram source code with its submodules:
-   ```bash
-   git clone --recursive --shallow-submodules https://github.com/DrKLO/Telegram.git Telegram
-   ```
-   In case you forgot the `--recursive` flag, change to the `Telegram` directory and run:
-   ```bash
-   git submodule init && git submodule update --init --recursive --depth=1
-   ```
-2. Copy your release.keystore into TMessagesProj/config
-3. Fill out RELEASE_KEY_PASSWORD, RELEASE_KEY_ALIAS, RELEASE_STORE_PASSWORD in gradle.properties to access your  release.keystore
-4.  Go to https://console.firebase.google.com/, create two android apps with application IDs org.telegram.messenger and org.telegram.messenger.beta, turn on firebase messaging and download google-services.json, which should be copied to the same folder as TMessagesProj.
-5. Open the project in the Studio (note that it should be opened, NOT imported).
-6. Fill out values in TMessagesProj/src/main/java/org/telegram/messenger/BuildVars.java – there’s a link for each of the variables showing where and which data to obtain.
-7. You are ready to compile Telegram.
+### ۲. موتور بومی پروتکل اینستاگرام (`:instagram-api`)
+- پیاده‌سازی مستقل کلاینت پروتکل معکوس اینستاگرام به زبان Kotlin بدون هیچ‌گونه WebView.
+- رمزنگاری اختصاصی RSA و AES-GCM کلمه عبور و داده‌های حساس (`#PWD_INSTAGRAM:4:...`).
+- امضای دیجیتال درخواست‌ها با HMAC-SHA256 و شبیه‌سازی دقیق هویت دستگاه.
+- دریافت مستقیم فید، تایم‌لاین و ریلزها با سرعت بالا.
 
-### Localization
+### ۳. ناوبری و تب‌های بومی (Native SuperApp Tabs)
+- **تب ۱ (گفتگوها)**: پیام‌رسان سریع تلگرام.
+- **تب ۲ (فید اینستاگرام)**: نمایش روان پست‌ها، دابل‌تپ لایک، فوروارد به چت‌های تلگرام (`ShareAlert`).
+- **تب ۳ (ریلز)**: پخش ویدیو تمام‌صفحه با اسکرول عمودی با بهره‌گیری از ویدیوپلیر سخت‌افزاری Media3.
+- **تب ۴ (تنظیمات)**: فرم لاگین امن RSA، ورود دومرحله‌ای (2FA) و کنترل لایه ضدسانسور.
 
-We moved all translations to https://translations.telegram.org/en/android/. Please use it.
+### ۴. شبکه ضدسانسور و دور زدن اختلالات (Resilient Networking)
+- **تکه‌تکه‌سازی سلام TLS (ClientHello Fragmentation)**: بای‌پس فایروال‌های بازرسی عمیق پکت (DPI).
+- **Clean Anycast DNS**: جلوگیری از مسمومیت DNS و هدایت مستقیم به آی‌پی‌های پایدار متا.
+- **Telegram Proxy Bridge**: اتصال هوشمند به پروکسی‌های فعال تلگرام (MTProto / SOCKS5).
+
+---
+
+## 🔒 اعتبارسنجی سلامت فایل (SHA-256)
+
+```text
+CCAAF5555E7D00C550CDBD4BA9383779F95EC9F98B6B2877EE732B97831130FF  Fresh-SuperApp.apk
+CCAAF5555E7D00C550CDBD4BA9383779F95EC9F98B6B2877EE732B97831130FF  Fresh.apk
+```
+
+</div>
