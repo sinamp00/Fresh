@@ -1530,8 +1530,6 @@ public class Theme {
                 return getString(R.string.ThemeDay);
             } else if ("Night".equals(name)) {
                 return getString(R.string.ThemeNight);
-            } else if ("OLED".equals(name)) {
-                return "OLED";
             }
             return info != null ? info.title : name;
         }
@@ -1648,7 +1646,7 @@ public class Theme {
             if (isDark != UNKNOWN) {
                 return isDark == DARK;
             }
-            if ("Dark Blue".equals(name) || "Night".equals(name) || "OLED".equals(name)) {
+            if ("Dark Blue".equals(name) || "Night".equals(name)) {
                 isDark = DARK;
             } else if ("Blue".equals(name) || "Arctic Blue".equals(name) || "Day".equals(name)) {
                 isDark = LIGHT;
@@ -4011,16 +4009,6 @@ public class Theme {
         sortAccents(themeInfo);
         themes.add(themeInfo);
         themesDict.put("Night", themeInfo);
-
-        themeInfo = new ThemeInfo();
-        themeInfo.name = "OLED";
-        themeInfo.assetName = "oled.attheme";
-        themeInfo.previewBackgroundColor = 0xff000000;
-        themeInfo.previewInColor = 0xff1f2123;
-        themeInfo.previewOutColor = 0xff3664af;
-        themeInfo.sortIndex = 6;
-        themes.add(themeInfo);
-        themesDict.put("OLED", themeInfo);
 
         String themesString = themeConfig.getString("themes2", null);
 
@@ -7119,7 +7107,7 @@ public class Theme {
             return new TLRPC.TL_baseThemeTinted();
         } else if ("Arctic Blue".equals(key)) {
             return new TLRPC.TL_baseThemeArctic();
-        } else if ("Night".equals(key) || "OLED".equals(key)) {
+        } else if ("Night".equals(key)) {
             return new TLRPC.TL_baseThemeNight();
         }
         return null;
