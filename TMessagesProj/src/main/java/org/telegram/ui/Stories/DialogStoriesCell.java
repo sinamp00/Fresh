@@ -332,14 +332,31 @@ public class DialogStoriesCell extends FrameLayout implements NotificationCenter
         titleView.setFocusableInTouchMode(true);
         addView(titleView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
 
-        telegramLogoView = new ImageView(context);
+        telegramLogoView = new ImageView(context) {
+            private final Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            {
+                textPaint.setTypeface(AndroidUtilities.bold());
+                textPaint.setTextSize(dp(20));
+            }
+
+            @Override
+            protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+                int width = (int) Math.ceil(textPaint.measureText(getString(R.string.AppName)));
+                setMeasuredDimension(width, dp(22));
+            }
+
+            @Override
+            protected void onDraw(Canvas canvas) {
+                textPaint.setColor(getTextLogoColor());
+                Paint.FontMetrics fm = textPaint.getFontMetrics();
+                float y = (getHeight() - fm.descent - fm.ascent) / 2f;
+                canvas.drawText(getString(R.string.AppName), 0, y, textPaint);
+            }
+        };
         telegramLogoView.setContentDescription(getString(R.string.AppName));
-        telegramLogoView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        telegramLogoView.setImageResource(R.drawable.telegram_logo_2);
-        telegramLogoView.setColorFilter(getTextLogoColor(), PorterDuff.Mode.MULTIPLY);
         telegramLogoView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
         telegramLogoView.setFocusableInTouchMode(true);
-        addView(telegramLogoView, LayoutHelper.createFrame(90, 22));
+        addView(telegramLogoView, LayoutHelper.createFrame(LayoutHelper.WRAP_CONTENT, 22));
 
         statusDrawable = new AnimatedEmojiDrawable.SwapAnimatedEmojiDrawable(null, dp(26));
         statusDrawable.center = true;

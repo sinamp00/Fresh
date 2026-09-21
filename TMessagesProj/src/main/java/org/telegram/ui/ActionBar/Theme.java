@@ -1530,6 +1530,8 @@ public class Theme {
                 return getString(R.string.ThemeDay);
             } else if ("Night".equals(name)) {
                 return getString(R.string.ThemeNight);
+            } else if ("OLED".equals(name)) {
+                return "OLED";
             }
             return info != null ? info.title : name;
         }
@@ -1646,7 +1648,7 @@ public class Theme {
             if (isDark != UNKNOWN) {
                 return isDark == DARK;
             }
-            if ("Dark Blue".equals(name) || "Night".equals(name)) {
+            if ("Dark Blue".equals(name) || "Night".equals(name) || "OLED".equals(name)) {
                 isDark = DARK;
             } else if ("Blue".equals(name) || "Arctic Blue".equals(name) || "Day".equals(name)) {
                 isDark = LIGHT;
@@ -4010,6 +4012,30 @@ public class Theme {
         themes.add(themeInfo);
         themesDict.put("Night", themeInfo);
 
+        themeInfo = new ThemeInfo();
+        themeInfo.name = "OLED";
+        themeInfo.assetName = "oled.attheme";
+        themeInfo.previewBackgroundColor = 0xff000000;
+        themeInfo.previewInColor = 0xff161616;
+        themeInfo.previewOutColor = 0xff00F5A0;
+        themeInfo.sortIndex = 6;
+        themeInfo.setAccentColorOptions(
+                new int[]    { 0xFF00F5A0, 0xFF6ABE3F, 0xFF8D78E3, 0xFFDE5E7E, 0xFF5977E8, 0xFFDBC11A, 0xff3e88f7, 0xff4ab5d3, 0xff4ab841, 0xffd95576, 0xffe27d2b, 0xff936cda, 0xffd04336, 0xffe8ae1c, 0xff7988a3 },
+                new int[]    { 0x00000000, 0xFF8A5294, 0xFFB46C1B, 0xFFAF4F6F, 0xFF266E8D, 0xFF744EB7, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
+                new int[]    { 0x00000000, 0xFF6855BB, 0xFFA53B4A, 0xFF62499C, 0xFF2F919D, 0xFF298B95, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },
+                new int[]    { 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000 },
+                new int[]    { 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000 },
+                new int[]    { 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000 },
+                new int[]    { 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xFF000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000, 0xff000000 },
+                new int[]    {          0,          9,         10,         11,         12,         13,          1,          2,          3,          4,          5,          6,          7,          8,         14 },
+                new String[] {         "", "YIxYGEALQVADAAAAA3QbEH0AowY", "9LW_RcoOSVACAAAAFTk3DTyXN-M", "O-wmAfBPSFADAAAA4zINVfD_bro", "F5oWoCs7QFACAAAAgf2bD_mg8Bw", "-Xc-np9y2VMCAAAARKr0yNNPYW0", "fqv01SQemVIBAAAApND8LDRUhRU", "F5oWoCs7QFACAAAAgf2bD_mg8Bw", "ptuUd96JSFACAAAATobI23sPpz0", "p-pXcflrmFIBAAAAvXYQk-mCwZU", "Nl8Pg2rBQVACAAAA25Lxtb8SDp0", "dhf9pceaQVACAAAAbzdVo4SCiZA", "9GcNVISdSVADAAAAUcw5BYjELW4", "9LW_RcoOSVACAAAAFTk3DTyXN-M", "dk_wwlghOFACAAAAfz9xrxi6euw" },
+                new int[]    {          0,         45,        135,          0,        180,          0,          0,          0,          0,          0,          0,          0,          0,          0,          0 },
+                new int[]    {          0,         34,         47,         52,         48,         54,         50,         37,         56,         48,         49,         40,         64,         38,         48 }
+                );
+        sortAccents(themeInfo);
+        themes.add(themeInfo);
+        themesDict.put("OLED", themeInfo);
+
         String themesString = themeConfig.getString("themes2", null);
 
         int remoteVersion = themeConfig.getInt("remote_version", 0);
@@ -4088,8 +4114,6 @@ public class Theme {
                 if (t != null) {
                     currentNightTheme = t;
                 }
-            } else if (themesDict.containsKey("Night")) {
-                currentNightTheme = themesDict.get("Night");
             }
 
             if (currentNightTheme != null && !themeConfig.contains("lastDarkTheme")) {
@@ -7109,7 +7133,7 @@ public class Theme {
             return new TLRPC.TL_baseThemeTinted();
         } else if ("Arctic Blue".equals(key)) {
             return new TLRPC.TL_baseThemeArctic();
-        } else if ("Night".equals(key)) {
+        } else if ("Night".equals(key) || "OLED".equals(key)) {
             return new TLRPC.TL_baseThemeNight();
         }
         return null;
@@ -10005,7 +10029,7 @@ public class Theme {
             if (accent.parentTheme.getKey().equals("Day") && accent.id == 9) {
                 return true;
             }
-            if ((accent.parentTheme.getKey().equals("Night") || accent.parentTheme.getKey().equals("Dark Blue")) && accent.id == 0) {
+            if ((accent.parentTheme.getKey().equals("Night") || accent.parentTheme.getKey().equals("Dark Blue") || accent.parentTheme.getKey().equals("OLED")) && accent.id == 0) {
                 return true;
             }
         }

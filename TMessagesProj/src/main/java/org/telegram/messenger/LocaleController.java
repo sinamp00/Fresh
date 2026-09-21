@@ -1465,6 +1465,36 @@ public class LocaleController {
         if (value == null) {
             value = "LOC_ERR:" + key;
         }
+        return replaceTelegramWithFresh(value);
+    }
+
+    public static String replaceTelegramWithFresh(String value) {
+        if (value == null || value.length() < 4) {
+            return value;
+        }
+        boolean hasDomain = value.contains("telegram.org");
+        if (hasDomain) {
+            value = value.replace("telegram.org", "###TG_DOMAIN###");
+        }
+        boolean hasTMe = value.contains("t.me");
+        if (hasTMe) {
+            value = value.replace("t.me", "###T_ME###");
+        }
+        if (value.contains("Telegram")) {
+            value = value.replace("Telegram", "Fresh");
+        }
+        if (value.contains("telegram")) {
+            value = value.replace("telegram", "fresh");
+        }
+        if (value.contains("تلگرام")) {
+            value = value.replace("تلگرام", "فرش");
+        }
+        if (hasTMe) {
+            value = value.replace("###T_ME###", "t.me");
+        }
+        if (hasDomain) {
+            value = value.replace("###TG_DOMAIN###", "telegram.org");
+        }
         return value;
     }
 
@@ -1476,7 +1506,7 @@ public class LocaleController {
                 value = getInstance().getLocalizedString(resourceId);
             }
         }
-        return value;
+        return replaceTelegramWithFresh(value);
     }
 
     public static String getString(@StringRes int res) {
@@ -1686,11 +1716,13 @@ public class LocaleController {
                 }
             }
 
+            String formatted;
             if (getInstance().currentLocale != null) {
-                return String.format(getInstance().currentLocale, value, args);
+                formatted = String.format(getInstance().currentLocale, value, args);
             } else {
-                return String.format(value, args);
+                formatted = String.format(value, args);
             }
+            return replaceTelegramWithFresh(formatted);
         } catch (Exception e) {
             FileLog.e(e);
             return "LOC_ERR: " + key;
@@ -1731,6 +1763,7 @@ public class LocaleController {
                 }
             }
 
+            value = replaceTelegramWithFresh(value);
             SpannableStringBuilder builder = new SpannableStringBuilder(value);
             for (int i = 0; i < args.length; i++) {
                 String formatter = "s";
